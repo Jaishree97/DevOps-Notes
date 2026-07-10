@@ -1,6 +1,6 @@
 # Docker Command Cheat Sheet
 
-> A comprehensive Docker command reference for developers and DevOps engineers. This cheat sheet covers the most commonly used Docker commands, Dockerfile instructions, Docker Compose, networking, volumes, cleanup, and interview essentials.
+> A practical Docker command reference for developers and DevOps engineers. This cheat sheet covers essential Docker commands, Dockerfile instructions, Docker Compose, networking, volumes, cleanup, best practices, and common interview concepts.
 
 ---
 
@@ -20,22 +20,36 @@
 
 ## Table of Contents
 
-- Container Commands
-- Container Management
-- Logs & Inspection
-- Execute Inside Container
-- Docker Images
-- Docker Volumes
-- Docker Networks
-- Run Containers on Network
-- Docker Compose
-- Dockerfile Instructions
-- Copy Files
-- Cleanup Commands
-- Useful One-Liners
-- Docker Workflow
-- Frequently Asked Interview Questions
-- Daily Docker Commands
+- [Docker Concepts at a Glance](#docker-concepts-at-a-glance)
+- [Docker Installation & Version](#docker-installation--version)
+- [Container Commands](#container-commands)
+- [Container Management](#container-management)
+- [Logs & Inspection](#logs--inspection)
+- [Execute Inside Container](#execute-inside-container)
+- [Docker Images](#docker-images)
+- [Docker Hub](#docker-hub)
+- [Docker Volumes](#docker-volumes)
+- [Docker Networks](#docker-networks)
+- [Run Containers on a Custom Network](#run-containers-on-a-custom-network)
+- [Docker Compose](#docker-compose)
+- [Dockerfile Instructions](#dockerfile-instructions)
+- [Copy Files](#copy-files)
+- [Cleanup Commands](#cleanup-commands)
+- [Useful One-Liners](#useful-one-liners)
+- [Docker Workflow](#docker-workflow)
+- [Docker Best Practices](#docker-best-practices)
+- [Frequently Asked Interview Questions](#frequently-asked-interview-questions)
+- [Daily Docker Commands](#daily-docker-commands)
+- [Author](#author)
+---
+
+## Docker Installation & Version
+
+| Task | Command |
+|------|---------|
+| Docker version | `docker --version` |
+| Docker Compose version | `docker compose version` |
+| Docker system information | `docker info` |
 
 ---
 
@@ -103,16 +117,27 @@
 
 | Task | Command |
 |------|---------|
-| List images | `docker images` |
 | Pull image | `docker pull nginx` |
 | Build image | `docker build -t my-app .` |
 | Build without cache | `docker build --no-cache -t my-app .` |
-| Tag image | `docker tag my-app user/my-app:v1` |
-| Push image | `docker push user/my-app:v1` |
 | Remove image | `docker rmi <image>` |
 | Remove unused images | `docker image prune` |
 | Remove all unused images | `docker image prune -a` |
 | Inspect image | `docker image inspect <image>` |
+| Show image history | `docker history <image>` |
+
+---
+
+## Docker Hub
+
+| Task | Command |
+|------|---------|
+| Log in to Docker Hub | `docker login` |
+| Log out from Docker Hub | `docker logout` |
+| Search for an image | `docker search nginx` |
+| Pull an image | `docker pull nginx:latest` |
+| Tag an image | `docker tag my-app:latest username/my-app:v1` |
+| Push an image | `docker push username/my-app:v1` |
 
 ---
 
@@ -183,6 +208,7 @@
 | `USER` | Specifies the user for subsequent instructions. |
 | `CMD` | Provides the default command executed at container startup. |
 | `ENTRYPOINT` | Defines the main executable for the container. |
+| `.dockerignore` | Excludes unnecessary files from the build context. |
 
 ---
 
@@ -269,3 +295,74 @@ Container
 ```
 
 ---
+
+## Daily Docker Commands
+
+```bash
+docker ps
+docker images
+docker build -t my-app .
+docker run -d -p 8080:80 my-app
+docker logs -f <container>
+docker exec -it <container> bash
+docker stop <container>
+docker rm <container>
+docker system df
+```
+---
+
+## Docker Best Practices
+
+- Use lightweight base images (Alpine or Slim).
+- Prefer multi-stage builds for production images.
+- Use `.dockerignore` to reduce build context.
+- Store persistent data in Docker Volumes.
+- Avoid running containers as the root user.
+- Prefer `COPY` over `ADD` unless additional features are required.
+
+---
+
+## Frequently Asked Interview Questions
+
+### Image vs Container
+An image is a read-only template. A container is a running instance of that image.
+
+### CMD vs ENTRYPOINT
+CMD provides default arguments, while ENTRYPOINT defines the main executable.
+
+### COPY vs ADD
+COPY copies local files. ADD also supports extracting archives and downloading URLs.
+
+### docker compose down vs docker compose down -v
+The `-v` flag removes associated volumes in addition to containers and networks.
+
+### What is the difference between a Volume and a Bind Mount?
+- **Volume:** Managed by Docker and ideal for persistent application data.
+- **Bind Mount:** Maps a host directory directly into the container and is commonly used during development.
+
+### Difference between EXPOSE and -p
+- `EXPOSE` documents the container port.
+- `-p` publishes the port to the host machine.
+
+### What is Docker Hub?
+Docker Hub is a cloud-based container registry used to store, share, and distribute Docker images. It allows developers to push custom images and pull them on any machine.
+
+---
+
+## Quick Notes
+
+- Containers are ephemeral.
+- Volumes preserve data.
+- Images are immutable.
+- One container should ideally run one main process.
+- Docker Compose is used for multi-container applications.
+
+## Author
+
+**Jaishree Chaure**
+AWS Certified Cloud Practitioner • DevOps & Cloud Enthusiast
+Documented as part of the **#90DaysOfDevOps** challenge (UDAAN Batch 11).
+
+---
+
+⭐ If you found this cheat sheet helpful, consider starring the repository.
