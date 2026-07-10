@@ -360,7 +360,10 @@ Docker Hub is a cloud-based container registry used to store, share, and distrib
 ## Author
 
 **Jaishree Chaure**
-AWS Certified Cloud Practitioner • DevOps & Cloud Enthusiast
+
+AWS Certified Cloud Practitioner 
+• DevOps & Cloud Enthusiast
+
 Documented as part of the **#90DaysOfDevOps** challenge (UDAAN Batch 11).
 
 ---
