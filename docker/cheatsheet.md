@@ -324,27 +324,27 @@ docker system df
 
 ## Frequently Asked Interview Questions
 
-### Image vs Container
+#1 Image vs Container
 An image is a read-only template. A container is a running instance of that image.
 
-### CMD vs ENTRYPOINT
+#2 CMD vs ENTRYPOINT
 CMD provides default arguments, while ENTRYPOINT defines the main executable.
 
-### COPY vs ADD
+#3 COPY vs ADD
 COPY copies local files. ADD also supports extracting archives and downloading URLs.
 
-### docker compose down vs docker compose down -v
+#4 docker compose down vs docker compose down -v
 The `-v` flag removes associated volumes in addition to containers and networks.
 
-### What is the difference between a Volume and a Bind Mount?
+#5 What is the difference between a Volume and a Bind Mount?
 - **Volume:** Managed by Docker and ideal for persistent application data.
 - **Bind Mount:** Maps a host directory directly into the container and is commonly used during development.
 
-### Difference between EXPOSE and -p
+#6 Difference between EXPOSE and -p
 - `EXPOSE` documents the container port.
 - `-p` publishes the port to the host machine.
 
-### What is Docker Hub?
+#7 What is Docker Hub?
 Docker Hub is a cloud-based container registry used to store, share, and distribute Docker images. It allows developers to push custom images and pull them on any machine.
 
 ---
