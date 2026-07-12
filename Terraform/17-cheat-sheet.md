@@ -216,23 +216,12 @@ terraform output public_ip
 
 ---
 
-# 🎉 Congratulations!
+# 👩‍💻 Author
 
-You have completed the **Terraform Fundamentals** series.
+**Jaishree Chaure**
 
-You now understand:
+**AWS Certified Cloud Practitioner • Aspiring DevOps Engineer**
 
-- ✅ Infrastructure as Code (IaC)
-- ✅ Terraform Workflow
-- ✅ Providers & Resources
-- ✅ Variables & Outputs
-- ✅ State Management
-- ✅ Modules
-- ✅ Backends & Remote State
-- ✅ Workspaces
-- ✅ Meta Arguments
-- ✅ Functions & Expressions
-- ✅ Provisioners
-- ✅ Terraform Best Practices
+Documented as part of the **#90DaysOfDevOps** challenge (UDAAN Batch 11).
 
-🚀 You're now ready to build real-world Terraform projects and continue your Infrastructure as Code journey.
+⭐ If you found this repository helpful, consider **starring it on GitHub**.
