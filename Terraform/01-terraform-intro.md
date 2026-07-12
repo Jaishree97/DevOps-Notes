@@ -78,13 +78,13 @@ Write Code → Run Terraform → Infrastructure Created
 
 Infrastructure as Code offers several advantages over manual cloud provisioning.
 
-- 🚀 Automates infrastructure creation
-- ⚡ Reduces deployment time
-- 🔄 Makes infrastructure reproducible
-- 📦 Keeps environments consistent
-- 🛡️ Reduces human error
-- 📜 Enables version control with Git
-- 🤝 Improves team collaboration
+- Automates infrastructure creation
+- Reduces deployment time
+- Makes infrastructure reproducible
+- Keeps environments consistent
+- Reduces human error
+- Enables version control with Git
+- Improves team collaboration
 
 ---
 
