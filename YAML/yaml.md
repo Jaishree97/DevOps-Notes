@@ -4,28 +4,31 @@
 
 ---
 
-# 📑 Table of Contents
+## 📑 Table of Contents
 
-- What is YAML?
-- Why YAML?
-- YAML Syntax
-- Data Types
-- Key-Value Pairs
-- Lists
-- Nested Objects
-- Multi-line Strings
-- Comments
-- Anchors & Aliases
-- Real DevOps Examples
-- Common Mistakes
-- Best Practices
-- Interview Questions
-- Quick Cheat Sheet
-- Summary
+- [What is YAML?](#-what-is-yaml)
+- [Why YAML?](#-why-yaml)
+- [Where YAML is Used](#-where-yaml-is-used)
+- [YAML Data Types](#-yaml-data-types)
+- [Key-Value Pairs](#-key-value-pairs)
+- [Lists](#-lists)
+- [Nested Objects](#-nested-objects-maps)
+- [Multi-line Strings](#-multi-line-strings)
+- [Comments](#-comments)
+- [Anchors & Aliases](#-anchors--aliases-advanced)
+- [Real DevOps Examples](#-real-devops-examples)
+- [Common Mistakes](#️-common-mistakes)
+- [YAML File Anatomy](#-yaml-file-anatomy)
+- [YAML Rules](#-yaml-rules)
+- [Validate YAML](#-validate-yaml)
+- [Best Practices](#-best-practices)
+- [Interview Questions](#-interview-questions)
+- [Quick Cheat Sheet](#-quick-cheat-sheet)
+- [Summary](#-summary)
 
 ---
 
-# 🚀 What is YAML?
+## 🚀 What is YAML?
 
 **YAML** stands for:
 
@@ -42,7 +45,7 @@ Unlike XML or JSON, YAML relies on **indentation** instead of brackets and comma
 
 ---
 
-# ❓ Why YAML?
+## ❓ Why YAML?
 
 YAML is widely used because it is:
 
@@ -55,7 +58,26 @@ YAML is widely used because it is:
 
 ---
 
-# 🛠 Where YAML is Used
+## 📂 YAML File Anatomy
+
+```yaml
+application:
+  name: DevOps-App
+  version: "1.0"
+
+database:
+  host: localhost
+  port: 3306
+```
+
+| Part | Description |
+|------|-------------|
+| `application` | Parent key |
+| `name` | Child key |
+| `DevOps-App` | Value |
+| `database` | Nested object |
+
+## 🛠 Where YAML is Used
 
 | Tool | Purpose |
 |------|----------|
@@ -71,17 +93,27 @@ YAML is widely used because it is:
 
 ---
 
-# 🧩 YAML Data Types
+## 📄 Common YAML Files
+
+| File | Used In |
+|------|----------|
+| `docker-compose.yml` | Docker Compose |
+| `.github/workflows/main.yml` | GitHub Actions |
+| `deployment.yaml` | Kubernetes |
+| `service.yaml` | Kubernetes |
+| `configmap.yaml` | Kubernetes |
+| `playbook.yml` | Ansible |
+| `values.yaml` | Helm |
+
+---
+
+## 🧩 YAML Data Types
 
 ```yaml
 string: DevOps
-
 integer: 10
-
 float: 3.14
-
 boolean: true
-
 null_value: null
 
 list:
@@ -105,7 +137,7 @@ object:
 
 ---
 
-# 🔑 Key-Value Pairs
+## 🔑 Key-Value Pairs
 
 The basic building block of YAML.
 
@@ -119,9 +151,9 @@ active: true
 
 ---
 
-# 📋 Lists
+## 📋 Lists
 
-## Block Style (Recommended)
+### Block Style (Recommended)
 
 ```yaml
 tools:
@@ -131,7 +163,7 @@ tools:
   - Terraform
 ```
 
-## Inline Style
+### Inline Style
 
 ```yaml
 tools: [Git, Docker, Kubernetes, Terraform]
@@ -141,7 +173,7 @@ tools: [Git, Docker, Kubernetes, Terraform]
 
 ---
 
-# 🏗 Nested Objects (Maps)
+## 🏗 Nested Objects (Maps)
 
 ```yaml
 server:
@@ -162,9 +194,9 @@ Hierarchy is created using **indentation**.
 
 ---
 
-# 📝 Multi-line Strings
+## 📝 Multi-line Strings
 
-## Literal Style (`|`)
+### Literal Style (`|`)
 
 Preserves line breaks exactly.
 
@@ -185,7 +217,7 @@ docker run app
 
 ---
 
-## Folded Style (`>`)
+### Folded Style (`>`)
 
 Converts line breaks into spaces.
 
@@ -209,7 +241,7 @@ Welcome to DevOps. YAML is easy to learn.
 
 ---
 
-# 💬 Comments
+## 💬 Comments
 
 ```yaml
 # Application Configuration
@@ -226,7 +258,7 @@ Comments start with **#**
 
 ---
 
-# 🔗 Anchors & Aliases (Advanced)
+## 🔗 Anchors & Aliases (Advanced)
 
 Reuse the same configuration without repeating it.
 
@@ -246,9 +278,9 @@ Useful for large configuration files.
 
 ---
 
-# 🚀 Real DevOps Examples
+## 🚀 Real DevOps Examples
 
-## GitHub Actions
+### GitHub Actions
 
 ```yaml
 name: CI Pipeline
@@ -273,61 +305,50 @@ jobs:
 
 ---
 
-## Docker Compose
+### Docker Compose
 
 ```yaml
 version: "3.9"
 
 services:
-
   web:
-
     image: nginx
-
     ports:
       - "80:80"
 ```
 
 ---
 
-## Kubernetes Deployment
+### Kubernetes Deployment
 
 ```yaml
 apiVersion: apps/v1
-
 kind: Deployment
 
 metadata:
   name: nginx
 
 spec:
-
   replicas: 3
 
   selector:
-
     matchLabels:
       app: nginx
 
   template:
-
     metadata:
-
       labels:
         app: nginx
 
     spec:
-
       containers:
-
-      - name: nginx
-
-        image: nginx
+        - name: nginx
+          image: nginx
 ```
 
 ---
 
-# ⚠️ Common Mistakes
+## ⚠️ Common Mistakes
 
 ## ❌ Missing Space
 
@@ -383,7 +404,7 @@ database:
 
 ---
 
-# 📏 YAML Rules
+## 📏 YAML Rules
 
 - Use spaces only
 - Never use tabs
@@ -394,7 +415,7 @@ database:
 
 ---
 
-# ⭐ Best Practices
+## ⭐ Best Practices
 
 - Use **2-space indentation**
 - Keep keys meaningful
@@ -407,7 +428,29 @@ database:
 
 ---
 
-# 🔍 Interview Questions
+## ✅ Validate YAML
+
+Before using a YAML file in production, validate it.
+
+### yamllint
+
+```bash
+yamllint file.yaml
+```
+
+### Docker Compose
+
+```bash
+docker compose config
+```
+
+### Kubernetes
+
+```bash
+kubectl apply --dry-run=client -f deployment.yaml
+```
+
+## 🔍 Interview Questions
 
 ### What is YAML?
 
@@ -431,11 +474,12 @@ Because it is simple, readable, lightweight, and supported by most automation to
 
 ---
 
-### Difference between `|` and `>`?
+## Difference between `|` and `>`
 
-| `|` | `>` |
-|-----|-----|
-| Preserves new lines | Folds lines into spaces |
+| Symbol | Purpose | Best Used For |
+|--------|---------|---------------|
+| `|` | Preserves line breaks exactly | Scripts, commands, certificates, configuration files |
+| `>` | Folds multiple lines into a single line | Long descriptions, messages, documentation |
 
 ---
 
@@ -445,7 +489,7 @@ Because YAML uses indentation to define hierarchy. Incorrect indentation makes t
 
 ---
 
-# 📚 Quick Cheat Sheet
+## 📚 Quick Cheat Sheet
 
 | Feature | Example |
 |----------|---------|
@@ -463,7 +507,7 @@ Because YAML uses indentation to define hierarchy. Incorrect indentation makes t
 
 ---
 
-# 🧠 Revision Tips
+## 🧠 Revision Tips
 
 ✅ Use **spaces**, never tabs.
 
@@ -483,13 +527,13 @@ Because YAML uses indentation to define hierarchy. Incorrect indentation makes t
 
 ---
 
-# 📌 Summary
+## 📌 Summary
 
 YAML is one of the most important configuration languages in modern DevOps. Understanding its syntax, indentation, data structures, and best practices is essential for working with tools like GitHub Actions, Docker Compose, Kubernetes, Ansible, and Helm.
 
 ---
 
-# 🎯 Key Takeaways
+## 🎯 Key Takeaways
 
 - YAML uses indentation instead of brackets.
 - Spaces matter—never use tabs.
@@ -499,4 +543,5 @@ YAML is one of the most important configuration languages in modern DevOps. Unde
 
 ---
 
-> 💡 **Pro Tip:** One missing space can break an entire deployment. Always validate your YAML before committing it.
+> [!TIP]
+> Always validate your YAML before committing. One missing space can break your deployment..
