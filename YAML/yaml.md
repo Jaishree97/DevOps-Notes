@@ -432,6 +432,10 @@ database:
 
 Before using a YAML file in production, validate it.
 
+Online Validator
+
+https://www.yamllint.com/
+
 ### yamllint
 
 ```bash
@@ -529,7 +533,7 @@ Because YAML uses indentation to define hierarchy. Incorrect indentation makes t
 
 ## 📌 Summary
 
-YAML is one of the most important configuration languages in modern DevOps. Understanding its syntax, indentation, data structures, and best practices is essential for working with tools like GitHub Actions, Docker Compose, Kubernetes, Ansible, and Helm.
+YAML is the foundation of many modern DevOps tools. Understanding its syntax, indentation, and best practices will help you work confidently with GitHub Actions, Docker Compose, Kubernetes, Ansible, Helm, and many other automation platforms.
 
 ---
 
@@ -545,3 +549,15 @@ YAML is one of the most important configuration languages in modern DevOps. Unde
 
 > [!TIP]
 > Always validate your YAML before committing. One missing space can break your deployment..
+
+---
+
+# 👩‍💻 Author
+
+**Jaishree Chaure**
+
+**AWS Certified Cloud Practitioner • Aspiring DevOps Engineer**
+
+Documented as part of the **#90DaysOfDevOps** challenge (UDAAN Batch 11).
+
+⭐ If you found these notes helpful, consider **starring the repository**.
