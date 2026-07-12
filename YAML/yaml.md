@@ -234,10 +234,12 @@ Output
 Welcome to DevOps. YAML is easy to learn.
 ```
 
-| Symbol | Use |
-|---------|-----|
-| `|` | Scripts, commands, certificates |
-| `>` | Long descriptions |
+## Difference between `|` and `>`
+
+| Symbol | Purpose | Best Used For |
+|--------|---------|---------------|
+| `|` | Preserves line breaks exactly | Scripts, shell commands, configuration |
+| `>` | Folds multiple lines into a single line | Long descriptions, messages, documentation |
 
 ---
 
@@ -482,7 +484,7 @@ Because it is simple, readable, lightweight, and supported by most automation to
 
 | Symbol | Purpose | Best Used For |
 |--------|---------|---------------|
-| `|` | Preserves line breaks exactly | Scripts, commands, certificates, configuration files |
+| `|` | Preserves line breaks exactly | Scripts, shell commands, configuration |
 | `>` | Folds multiple lines into a single line | Long descriptions, messages, documentation |
 
 ---
