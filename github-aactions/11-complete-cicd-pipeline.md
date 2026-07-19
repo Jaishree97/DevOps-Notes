@@ -16,7 +16,7 @@ GitHub Actions enables you to build powerful CI/CD pipelines by automating tasks
 
 ## CI/CD Pipeline Architecture
 
-![CI/CD Pipeline with GitHub Actions and Docker](./images/ci-cd.png)
+![CI/CD Pipeline with GitHub Actions and Docker](ci-cd.png)
 
 ---
 
