@@ -1,11 +1,11 @@
 # GitHub Actions: Artifacts & Caching
 
-Artifacts and caching are powerful features in GitHub Actions that improve workflow efficiency and reliability.
+Artifacts and caching are essential features in GitHub Actions that improve workflow efficiency and reliability.
 
-- **Artifacts** allow you to store and share files generated during workflow execution.
-- **Caching** speeds up workflows by reusing dependencies between runs.
+- **Artifacts** help preserve files generated during a workflow run.
+- **Caching** reduces workflow execution time by reusing dependencies between runs.
 
-Both are commonly used in modern CI/CD pipelines to optimize build times and preserve important workflow outputs.
+Both are widely used in modern CI/CD pipelines to optimize performance and simplify build and deployment processes.
 
 ---
 
@@ -17,40 +17,41 @@ Both are commonly used in modern CI/CD pipelines to optimize build times and pre
 - Avoid repeatedly downloading dependencies.
 - Improve CI/CD pipeline performance and reliability.
 
+> **Note:** Artifacts and caching solve different problems and are often used together in production workflows.
+
 ---
 
 ## 1. Artifacts
 
-Artifacts are files or directories produced during a workflow run that you want to preserve.
+Artifacts are files or directories produced during a workflow run that you want to preserve or share.
 
-### Common Use Cases
+### 1.1 Common Use Cases
+
+Artifacts are commonly used for:
 
 - Build outputs
 - Compiled binaries
 - Test reports
 - Application logs
 - Deployment packages
-- Coverage reports
+- Code coverage reports
 
-Artifacts are uploaded using:
+GitHub provides the following actions for artifact management:
 
 ```yaml
 actions/upload-artifact
-```
-
-Artifacts are downloaded using:
-
-```yaml
 actions/download-artifact
 ```
 
-> **Note:** Artifacts are stored for 90 days by default (configurable).
+> **Note:** Artifacts are stored for 90 days by default. You can configure their retention period.
 
 ---
 
-## Uploading an Artifact
+### 1.2 Uploading an Artifact
 
-### Example
+Use the `actions/upload-artifact` action to save files generated during a workflow.
+
+#### Example
 
 ```yaml
 steps:
@@ -65,7 +66,7 @@ steps:
       retention-days: 7
 ```
 
-### Explanation
+#### Parameters
 
 | Parameter | Description |
 |----------|----------|
@@ -73,13 +74,19 @@ steps:
 | path | File or directory to upload |
 | retention-days | Number of days to retain the artifact |
 
+#### Explanation
+
+- `name` uniquely identifies the artifact.
+- `path` specifies the files or folders to upload.
+- `retention-days` controls how long the artifact is stored.
+
 ---
 
-## Downloading an Artifact
+### 1.3 Downloading an Artifact
 
-Artifacts can be downloaded in the same workflow by another job.
+Artifacts can be downloaded by other jobs within the same workflow.
 
-### Example
+#### Example
 
 ```yaml
 jobs:
@@ -109,76 +116,80 @@ jobs:
         run: ./deploy.sh
 ```
 
-### Workflow Execution Flow
+#### Workflow Execution Flow
 
 ```text
 Build Job
-    |
-    v
+   |
+   v
 Generate Files
-    |
-    v
+   |
+   v
 Upload Artifact
-    |
-    v
+   |
+   v
 Deploy Job
-    |
-    v
+   |
+   v
 Download Artifact
-    |
-    v
+   |
+   v
 Deploy Application
 ```
 
-> **Important:** The artifact name must match during upload and download.
+> **Important:** The artifact name used during download must exactly match the upload name.
 
 ---
 
 ## 2. Caching
 
-Caching stores dependencies between workflow runs.
+Caching stores dependencies between workflow runs to improve performance.
 
-Instead of downloading dependencies every time the workflow runs, GitHub restores them from the cache whenever possible.
+Instead of downloading dependencies every time a workflow executes, GitHub restores them from a previously saved cache whenever possible.
 
-### Common Use Cases
+### 2.1 Common Use Cases
+
+Caching is commonly used for:
 
 - Node.js packages
 - Python packages
 - Maven dependencies
-- Docker layers
-- Terraform plugins
-- Package manager caches
+- Gradle dependencies
+- Terraform plugin cache
+- Package manager cache directories
 
-Caching improves:
+### Benefits of Caching
 
-- Build speed
-- Pipeline performance
-- Resource utilization
+- Faster builds
+- Reduced network usage
+- Improved CI/CD performance
+- Reduced installation time
 
 ---
 
-## Cache Key Strategy
+### 2.2 Cache Key Strategy
 
 A cache key uniquely identifies cached data.
 
-A good cache key should change whenever dependencies change.
+A good cache key should change whenever your dependencies change.
 
-### Example
+#### Example
 
 ```yaml
 key: node-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 ```
 
-GitHub automatically creates a new cache when:
+#### Explanation
 
-- Dependency files change.
-- Cache keys change.
+- `runner.os` creates OS-specific caches.
+- `hashFiles()` automatically changes the cache key whenever dependency files are modified.
+- GitHub creates a new cache when the key changes.
 
 ---
 
-## Caching Node.js Dependencies
+### 2.3 Caching Node.js Dependencies
 
-### Example
+#### Example
 
 ```yaml
 steps:
@@ -199,19 +210,19 @@ steps:
     run: npm test
 ```
 
-### Explanation
+#### Parameters
 
 | Parameter | Purpose |
-|---------|---------|
+|----------|----------|
 | path | Directory to cache |
 | key | Unique cache identifier |
 | restore-keys | Fallback cache keys |
 
 ---
 
-## Caching Python Dependencies
+### 2.4 Caching Python Dependencies
 
-### Example
+#### Example
 
 ```yaml
 steps:
@@ -231,7 +242,7 @@ steps:
 
 ---
 
-## Cache Workflow
+### 2.5 Cache Workflow
 
 ```text
 Workflow Starts
@@ -245,36 +256,37 @@ Cache Found?
  Yes        No
  |           |
 Restore     Install Dependencies
- |           |
-Skip         Create Cache
-Installation |
-      \     /
-       v   v
-    Continue Workflow
+ Cache         |
+ |             |
+ |         Create Cache
+  \           /
+   \         /
+     Continue Workflow
 ```
 
 ---
 
-## Artifacts vs Cache
+## 3. Artifacts vs Cache
 
 | Feature | Artifacts | Cache |
 |--------|--------|--------|
-| Purpose | Store generated files | Speed up workflows |
+| Purpose | Store workflow-generated files | Speed up workflow execution |
 | Shared Between | Jobs and workflow runs | Workflow runs |
-| Lifetime | Configurable (90 days default) | 7 days since last access |
+| Default Lifetime | 90 days | 7 days since last access |
 | Best For | Build outputs and reports | Dependencies |
-| Examples | dist/, logs, test reports | node_modules/, pip cache |
+| Examples | dist/, logs, reports | node_modules/, pip cache |
 
 ---
 
-## When to Use Artifacts
+## 4. When to Use Artifacts
 
 Use artifacts when you want to:
 
-- Preserve workflow outputs.
+- Preserve build outputs.
+- Store test reports.
+- Save application logs.
 - Share files between jobs.
-- Store deployment packages.
-- Save logs and reports.
+- Create deployment packages.
 
 ### Examples
 
@@ -282,19 +294,20 @@ Use artifacts when you want to:
 dist/
 build/
 coverage/
-logs/
 reports/
+logs/
 ```
 
 ---
 
-## When to Use Cache
+## 5. When to Use Cache
 
 Use cache when you want to:
 
 - Reduce build time.
-- Avoid downloading dependencies repeatedly.
-- Improve CI/CD performance.
+- Reuse dependencies.
+- Improve workflow performance.
+- Avoid repeated package downloads.
 
 ### Examples
 
@@ -308,53 +321,53 @@ terraform plugin cache
 
 ---
 
-## Best Practices
+## 6. Best Practices
 
 ### Artifacts
 
 - Use descriptive artifact names.
 - Configure appropriate retention periods.
-- Store only required files.
-- Remove unnecessary large files.
+- Upload only necessary files.
+- Remove unnecessary large artifacts.
 
 ### Cache
 
-- Use `hashFiles()` for dependency-based cache invalidation.
-- Keep cache keys predictable.
+- Use `hashFiles()` for cache invalidation.
+- Include the operating system in cache keys.
 - Use `restore-keys` for fallback matching.
-- Cache only frequently reused dependencies.
+- Cache only reusable dependencies.
 
 ---
 
-## Key Rules
+## 7. Key Rules
 
 - Artifact names should be unique within a workflow run.
 - Cache keys are immutable.
 - Use `hashFiles()` for automatic cache invalidation.
 - Cache is not automatically shared across branches.
-- Downloaded artifact names must match uploaded names.
-- Use caching only for dependencies, not build outputs.
+- Artifact names must match during upload and download.
+- Use caching for dependencies, not build outputs.
 
 ---
 
-## Key Takeaways
+## 8. Key Takeaways
 
-- Artifacts preserve important workflow files.
-- Caching significantly improves workflow speed.
-- Artifacts are ideal for build outputs and reports.
-- Cache is ideal for dependencies and package managers.
-- Proper cache key design is essential.
-- Using both features can greatly optimize CI/CD pipelines.
+- Artifacts preserve workflow-generated files.
+- Caching significantly improves workflow performance.
+- Artifacts are ideal for reports and build outputs.
+- Cache is ideal for reusable dependencies.
+- Proper cache key design is essential for efficient CI/CD pipelines.
+- Using both features together improves workflow reliability and speed.
 
 ---
 
-## Quick Summary
+## 9. Quick Summary
 
 | Concept | Purpose |
 |--------|--------|
 | Artifacts | Store workflow-generated files |
-| Upload Artifact | Save files after a workflow run |
-| Download Artifact | Access saved files in other jobs |
+| Upload Artifact | Save files after workflow execution |
+| Download Artifact | Access files in other jobs |
 | Cache | Reuse dependencies between runs |
 | Cache Key | Identify cached data |
 | restore-keys | Fallback cache matching |
