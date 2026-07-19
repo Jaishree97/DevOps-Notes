@@ -14,6 +14,10 @@ GitHub Actions enables you to build powerful CI/CD pipelines by automating tasks
 
 > **Note:** A well-designed CI/CD pipeline improves software quality, reduces manual effort, and accelerates application delivery.
 
+## CI/CD Pipeline Architecture
+
+![CI/CD Pipeline with GitHub Actions and Docker](./images/ci-cd.png)
+
 ---
 
 ## Why Use a CI/CD Pipeline?
