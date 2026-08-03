@@ -1,345 +1,223 @@
 # 📘 DevSecOps Lifecycle
 
-<p align="center">
+> **"Secure every stage of the Software Development Lifecycle (SDLC)."**
 
-> **"Security is not a checkpoint—it's a continuous process throughout the software development lifecycle."**
-
-</p>
+The DevSecOps lifecycle integrates security into every phase of software development, from planning to monitoring. Instead of treating security as a final checkpoint, DevSecOps makes it a continuous process.
 
 ---
 
-# 📑 Table of Contents
+## 📑 Table of Contents
 
-- [🎯 Learning Objectives](#-learning-objectives)
 - [📖 What is the DevSecOps Lifecycle?](#-what-is-the-devsecops-lifecycle)
-- [🏗 DevSecOps Lifecycle Overview](#-devsecops-lifecycle-overview)
-- [1️⃣ Planning](#1️⃣-planning)
-- [2️⃣ Coding](#2️⃣-coding)
-- [3️⃣ Build](#3️⃣-build)
-- [4️⃣ Testing](#4️⃣-testing)
-- [5️⃣ Release](#5️⃣-release)
-- [6️⃣ Deployment](#6️⃣-deployment)
-- [7️⃣ Operations](#7️⃣-operations)
-- [8️⃣ Monitoring](#8️⃣-monitoring)
-- [🛠 Security Tools Across the Lifecycle](#-security-tools-across-the-lifecycle)
-- [💻 Hands-on Example](#-hands-on-example)
-- [🌍 Real-World Workflow](#-real-world-workflow)
-- [🚀 Best Practices](#-best-practices)
+- [🔄 Lifecycle Stages](#-lifecycle-stages)
+- [🛡 Security Activities at Each Stage](#-security-activities-at-each-stage)
+- [🛠 Common Tools](#-common-tools)
+- [💻 Example Workflow](#-example-workflow)
+- [✅ Best Practices](#-best-practices)
 - [⚠️ Common Mistakes](#️-common-mistakes)
-- [💡 Key Takeaways](#-key-takeaways)
+- [📝 Quick Revision](#-quick-revision)
 - [🎤 Interview Questions](#-interview-questions)
-- [📝 Summary](#-summary)
-
----
-
-# 🎯 Learning Objectives
-
-After completing this chapter, you will be able to:
-
-- Explain every phase of the DevSecOps lifecycle.
-- Identify security activities performed at each stage.
-- Understand how automation improves security.
-- Recognize commonly used DevSecOps tools.
 
 ---
 
 # 📖 What is the DevSecOps Lifecycle?
 
-The **DevSecOps Lifecycle** is a continuous approach to software development where **security is integrated into every phase** of the Software Development Lifecycle (SDLC).
+The **DevSecOps Lifecycle** is a software development approach where **security is integrated into every stage of the Software Development Lifecycle (SDLC)**.
 
-Instead of performing security checks only before deployment, security controls are applied continuously—from planning to production monitoring.
+Instead of performing security checks only before deployment, every stage includes automated security practices to identify and fix vulnerabilities as early as possible.
+
+> [!NOTE]
+> The goal is to **build secure software continuously**, not secure software only before release.
 
 ---
 
-# 🏗 DevSecOps Lifecycle Overview
+# 🔄 Lifecycle Stages
 
 ```text
-                ┌────────────────────────────┐
-                │ Continuous Monitoring      │
-                └─────────────▲──────────────┘
-                              │
-Plan
- │
- ▼
-Code
- │
- ▼
-Build
- │
- ▼
-Test
- │
- ▼
-Release
- │
- ▼
-Deploy
- │
- ▼
-Operate
- │
- └────────────────────────────► Monitor
+                   🔒 Security
+                        ▲
+                        │
+Plan → Code → Build → Test → Release → Deploy → Monitor
+                        │
+                Continuous Feedback
 ```
 
-Every phase includes automated security checks and continuous feedback.
+> [!IMPORTANT]
+> Security is **not a separate stage** in DevSecOps. It is integrated into every stage of the SDLC through automation, continuous testing, and monitoring.
 
 ---
 
-# 1️⃣ Planning
+# 🛡 Security Activities at Each Stage
 
-## Purpose
-
-Define project requirements, architecture, risks, and security objectives before development begins.
-
-### Security Activities
-
-- Define security requirements
-- Perform threat modeling
-- Risk assessment
-- Compliance planning
-- Identify sensitive data
-
-### Example
-
-A banking application identifies that customer account numbers and passwords require encryption before development starts.
+| Stage | Purpose | Security Activities |
+|--------|---------|---------------------|
+| 📋 Plan | Define project requirements | Threat modeling, security requirements, risk assessment |
+| 💻 Code | Develop application | Secure coding, code reviews, secret scanning |
+| 🏗 Build | Compile application | SAST, dependency scanning (SCA) |
+| 🧪 Test | Validate functionality | Security testing, vulnerability scanning |
+| 🚀 Release | Prepare deployment | Policy validation, artifact signing |
+| ☁️ Deploy | Deploy application | IaC scanning, container security, secure configuration |
+| 📊 Monitor | Monitor production | Logging, runtime monitoring, alerting |
+| 🔁 Feedback | Continuous improvement | Patch vulnerabilities, improve security policies |
 
 ---
 
-# 2️⃣ Coding
+# 🛠 Common Tools
 
-## Purpose
-
-Develop secure application code.
-
-### Security Activities
-
-- Secure coding practices
-- Secret management
-- Code reviews
-- Static code analysis (SAST)
-
-### Example
-
-Instead of hardcoding AWS credentials, developers use GitHub Secrets or a secret management service.
-
----
-
-# 3️⃣ Build
-
-## Purpose
-
-Compile the application and prepare deployment artifacts.
-
-### Security Activities
-
-- Dependency scanning (SCA)
-- SBOM generation
-- Package validation
-- Build verification
-
-### Example
-
-GitHub Actions automatically scans project dependencies for known vulnerabilities during every build.
-
----
-
-# 4️⃣ Testing
-
-## Purpose
-
-Verify application quality and security before release.
-
-### Security Activities
-
-- Unit testing
-- Integration testing
-- Dynamic Application Security Testing (DAST)
-- Container scanning
-
-### Example
-
-Trivy scans Docker images before publishing them.
-
----
-
-# 5️⃣ Release
-
-## Purpose
-
-Prepare a secure release for deployment.
-
-### Security Activities
-
-- Artifact signing
-- Release approval
-- Security validation
-- Version verification
-
-Only approved and verified artifacts should move to production.
-
----
-
-# 6️⃣ Deployment
-
-## Purpose
-
-Deploy applications securely to production environments.
-
-### Security Activities
-
-- Secure CI/CD pipelines
-- Infrastructure validation
-- Policy enforcement
-- Least-privilege access
-
-Deployment should be automated to reduce manual errors.
-
----
-
-# 7️⃣ Operations
-
-## Purpose
-
-Keep applications running securely after deployment.
-
-### Security Activities
-
-- Patch management
-- Configuration management
-- Backup
-- Vulnerability management
-
-Operations teams ensure infrastructure remains secure and available.
-
----
-
-# 8️⃣ Monitoring
-
-## Purpose
-
-Continuously observe applications and infrastructure for security events.
-
-### Security Activities
-
-- Log monitoring
-- Alerting
-- Intrusion detection
-- Runtime security
-- Incident response
-
-Monitoring enables rapid detection and response to threats.
-
----
-
-# 🛠 Security Tools Across the Lifecycle
-
-| Stage | Common Tools |
-|---------|--------------|
-| Planning | Jira, Confluence, Threat Dragon |
-| Coding | Git, GitHub, Semgrep, CodeQL |
-| Build | Maven, Gradle, npm, Snyk |
-| Testing | Trivy, OWASP ZAP |
-| Release | Cosign, GitHub Releases |
-| Deployment | GitHub Actions, Jenkins, Argo CD |
-| Operations | Kubernetes, Docker |
+| Stage | Popular Tools |
+|--------|---------------|
+| Plan | Jira, Confluence |
+| Code | Git, GitHub, GitLab |
+| Build | GitHub Actions, Jenkins, GitLab CI |
+| SAST | SonarQube, Semgrep, CodeQL |
+| SCA | Snyk, Dependabot, OWASP Dependency-Check |
+| Secret Scanning | Gitleaks, TruffleHog |
+| Container Security | Trivy, Docker Scout, Grype |
+| IaC Security | Checkov, tfsec, Terrascan |
 | Monitoring | Prometheus, Grafana, Falco |
 
 ---
 
-# 💻 Hands-on Example
+# 💻 Example Workflow
 
-A developer pushes code to GitHub.
+A developer pushes new code to GitHub.
 
 ```text
 Developer
-      │
-      ▼
-GitHub Repository
-      │
-      ▼
+    │
+ Git Push
+    │
 GitHub Actions
-      │
-      ├── Code Quality
-      ├── Secret Scan
-      ├── SAST
-      ├── Dependency Scan
-      ├── Build
-      ├── Docker Image Scan
-      └── Deploy
+    │
+├── Build
+├── Unit Tests
+├── SAST
+├── Dependency Scan
+├── Secret Scan
+├── Container Scan
+└── IaC Scan
+    │
+Deploy
+    │
+Monitor
 ```
 
-If any security check fails, the pipeline stops automatically.
+If any security check fails, the pipeline stops until the issue is resolved.
 
 ---
 
-# 🌍 Real-World Workflow
+# ✅ Best Practices
 
-A fintech company follows this workflow:
-
-- Plan security requirements
-- Develop secure code
-- Scan dependencies
-- Scan Docker images
-- Deploy using GitHub Actions
-- Monitor production with Prometheus and Grafana
-- Detect runtime threats using Falco
-
-This approach helps deliver secure software continuously.
-
----
-
-# 🚀 Best Practices
-
-- Automate security checks.
-- Scan every pull request.
+- Integrate security from the planning stage.
+- Automate security scans in CI/CD pipelines.
+- Scan every Pull Request.
 - Keep dependencies updated.
-- Apply least-privilege access.
-- Monitor production continuously.
-- Review security findings regularly.
-- Integrate security early.
+- Never hardcode secrets.
+- Apply the Principle of Least Privilege (PoLP).
+- Continuously monitor production environments.
+- Fix vulnerabilities as early as possible.
 
 ---
 
 # ⚠️ Common Mistakes
 
 - Treating security as the final step.
-- Ignoring dependency vulnerabilities.
-- Hardcoding secrets.
-- Skipping image scans.
-- Using outdated libraries.
-- Disabling security checks to speed up releases.
+- Ignoring failed security scans.
+- Hardcoding credentials or API keys.
+- Using outdated dependencies or container images.
+- Skipping production monitoring.
+- Delaying vulnerability remediation.
 
 ---
 
-# 💡 Key Takeaways
+# 📝 Quick Revision
 
-- Security exists in every lifecycle phase.
-- Automation enables faster and more consistent security.
-- Continuous monitoring is essential after deployment.
-- Collaboration between developers, operations, and security teams is key.
+- DevSecOps integrates security throughout the SDLC.
+- Every SDLC stage includes security activities.
+- CI/CD automates security testing.
+- Security is a shared responsibility.
+- Continuous monitoring helps detect and respond to threats.
+- Early detection reduces cost and improves software quality.
 
 ---
 
 # 🎤 Interview Questions
 
-1. What is the DevSecOps Lifecycle?
-2. Why is security integrated into every phase?
-3. What happens during the Build stage?
-4. What is the purpose of continuous monitoring?
-5. Which tools are commonly used during Testing?
-6. Why is dependency scanning important?
-7. What security checks should run in a CI/CD pipeline?
+### 1. What is the DevSecOps lifecycle?
+
+**Answer:**
+
+The DevSecOps lifecycle integrates security into every stage of the Software Development Lifecycle (SDLC). Security is continuously applied from planning and coding to deployment and monitoring through automation and collaboration.
 
 ---
 
-# 📝 Summary
+### 2. Why should security be integrated into every SDLC stage?
 
-The DevSecOps Lifecycle embeds security into every stage of software delivery—from planning and coding to deployment and monitoring. By combining automation, collaboration, and continuous security practices, organizations can release software quickly while maintaining a strong security posture.
+**Answer:**
+
+Integrating security early helps detect vulnerabilities sooner, reduces remediation costs, speeds up software delivery, and minimizes security risks in production.
 
 ---
 
-## 📚 Next Chapter
+### 3. What security activities happen during the Build stage?
 
-➡️ **03-shift-left-security.md**
+**Answer:**
 
-Learn why identifying vulnerabilities early is one of the most effective ways to reduce security risks, development costs, and release delays.
+During the Build stage, automated security checks such as:
+
+- SAST (Static Application Security Testing)
+- SCA (Software Composition Analysis)
+- Dependency Scanning
+- Build Artifact Validation
+
+are commonly performed.
+
+---
+
+### 4. Which tools are commonly used for SAST and SCA?
+
+**Answer:**
+
+**SAST Tools**
+
+- SonarQube
+- Semgrep
+- CodeQL
+
+**SCA Tools**
+
+- Snyk
+- Dependabot
+- OWASP Dependency-Check
+
+---
+
+### 5. Why is monitoring important in DevSecOps?
+
+**Answer:**
+
+Monitoring helps detect security incidents, suspicious activities, performance issues, and vulnerabilities after deployment. It enables faster response and continuous improvement.
+
+---
+
+### 6. How does CI/CD support the DevSecOps lifecycle?
+
+**Answer:**
+
+CI/CD automates security checks such as code analysis, dependency scanning, secret detection, container scanning, and IaC scanning before deployment, ensuring only secure code reaches production.
+
+---
+
+# 📌 Key Takeaways
+
+- DevSecOps embeds security into every phase of the SDLC.
+- Security is continuous, automated, and collaborative.
+- CI/CD pipelines automate security validation.
+- Early vulnerability detection reduces cost and risk.
+- Continuous monitoring strengthens application security over time.
+
+---
+
+## ⏭️ Next
+
+**➡️ 03-shift-left-security.md**
