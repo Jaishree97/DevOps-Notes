@@ -1,351 +1,240 @@
 # 📘 Static Application Security Testing (SAST)
 
-<p align="center">
+> **"Find security vulnerabilities in source code before the application is built or deployed."**
 
-> **"Secure your code before you build it."**
-
-Analyze Source Code • Find Vulnerabilities Early • Shift Security Left
-
-</p>
+Static Application Security Testing (SAST) analyzes an application's **source code, bytecode, or binaries** without executing the application to identify security vulnerabilities early in the Software Development Lifecycle (SDLC).
 
 ---
 
 ## 📑 Table of Contents
 
-- [📋 Chapter Information](#-chapter-information)
-- [🎯 Learning Objectives](#-learning-objectives)
-- [📚 Prerequisites](#-prerequisites)
 - [📖 What is SAST?](#-what-is-sast)
-- [🤔 Why SAST Matters](#-why-sast-matters)
-- [⚙️ How SAST Works](#️-how-sast-works)
-- [🔄 SAST Workflow](#-sast-workflow)
-- [⚖️ SAST vs DAST vs SCA](#️-sast-vs-dast-vs-sca)
-- [🔍 Common Vulnerabilities Detected](#-common-vulnerabilities-detected)
-- [🛠 Popular SAST Tools](#-popular-sast-tools)
-- [💻 Hands-on Lab (Semgrep)](#-hands-on-lab-semgrep)
-- [🚀 GitHub Actions Integration](#-github-actions-integration)
-- [📌 Best Practices](#-best-practices)
-- [❌ Common Mistakes](#-common-mistakes)
-- [💡 Key Takeaways](#-key-takeaways)
+- [🎯 Why SAST?](#-why-sast)
+- [🔄 How SAST Works](#-how-sast-works)
+- [🔍 Vulnerabilities Detected by SAST](#-vulnerabilities-detected-by-sast)
+- [🛠 Common SAST Tools](#-common-sast-tools)
+- [💻 Practical Example](#-practical-example)
+- [📊 SAST vs DAST](#-sast-vs-dast)
+- [✅ Best Practices](#-best-practices)
+- [⚠️ Common Mistakes](#️-common-mistakes)
+- [📝 Quick Revision](#-quick-revision)
 - [🎤 Interview Questions](#-interview-questions)
-- [📚 References](#-references)
-- [📝 Summary](#-summary)
-
----
-
-# 📋 Chapter Information
-
-| Category | Details |
-|-----------|----------|
-| Difficulty | 🟢 Beginner |
-| Reading Time | 15–20 Minutes |
-| Hands-on Lab | ✅ Yes |
-| Interview Focus | ⭐⭐⭐⭐⭐ |
-
----
-
-# 🎯 Learning Objectives
-
-After completing this chapter, you will be able to:
-
-- Explain what SAST is.
-- Understand how SAST works.
-- Identify common vulnerabilities found by SAST.
-- Compare SAST with DAST and SCA.
-- Scan source code using Semgrep.
-- Integrate SAST into a GitHub Actions pipeline.
-
----
-
-# 📚 Prerequisites
-
-Before reading this chapter, you should understand:
-
-- DevSecOps Basics
-- SDLC
-- Shift Left Security
-- Git & GitHub
-- CI/CD Fundamentals
 
 ---
 
 # 📖 What is SAST?
 
-**Static Application Security Testing (SAST)** is a security testing technique that analyzes an application's **source code, bytecode, or binaries without executing the application**.
+Static Application Security Testing (SAST) is a security testing technique that scans an application's **source code** without running it.
 
-Unlike runtime testing, SAST examines the code itself to identify security vulnerabilities during development.
+It identifies coding mistakes and security vulnerabilities early in the development process.
 
-Because the application does not need to run, SAST is considered a **static** testing method.
-
-> 💡 **Shift Left Connection:** SAST helps developers identify and fix security issues before the application reaches testing or production.
-
----
-
-# 🤔 Why SAST Matters
-
-Imagine a developer introduces an SQL Injection vulnerability.
-
-Without SAST:
-
-- The vulnerable code is committed.
-- The application is built.
-- It is deployed.
-- The vulnerability may only be discovered during penetration testing or after an attack.
-
-With SAST:
-
-- The code is scanned immediately.
-- The vulnerability is reported.
-- The developer fixes it before deployment.
-
-This saves time, reduces costs, and lowers security risks.
+> [!NOTE]
+> SAST is also known as **White Box Testing** because it has access to the application's source code.
 
 ---
 
-# ⚙️ How SAST Works
+# 🎯 Why SAST?
+
+SAST helps developers:
+
+- Detect vulnerabilities early.
+- Reduce remediation costs.
+- Improve code quality.
+- Secure applications before deployment.
+- Integrate security into CI/CD pipelines.
+
+---
+
+# 🔄 How SAST Works
 
 ```text
 Developer Writes Code
           │
           ▼
-Git Commit
+ Git Push / Pull Request
           │
           ▼
-SAST Scanner
+     SAST Scanner
           │
-          ├── Analyze Source Code
-          ├── Identify Security Patterns
-          ├── Generate Report
-          └── Suggest Fixes
+          ▼
+Analyzes Source Code
+          │
+          ▼
+Security Report
           │
           ▼
 Developer Fixes Issues
 ```
 
-SAST tools examine the source code and compare it against predefined security rules to identify potential vulnerabilities.
+SAST scans the code **without executing the application**.
 
 ---
 
-# 🔄 SAST Workflow
+# 🔍 Vulnerabilities Detected by SAST
 
-```text
-Plan
- │
- ▼
-Write Code
- │
- ▼
-Commit Code
- │
- ▼
-Run SAST Scan
- │
- ▼
-Review Findings
- │
- ▼
-Fix Vulnerabilities
- │
- ▼
-Commit Updated Code
- │
- ▼
-Build & Deploy
-```
+| Vulnerability | Example |
+|---------------|---------|
+| SQL Injection | Unsafe database queries |
+| Cross-Site Scripting (XSS) | Unsanitized user input |
+| Hardcoded Secrets | API keys, passwords |
+| Buffer Overflow | Memory handling issues |
+| Command Injection | Unsafe system commands |
+| Weak Cryptography | Insecure encryption algorithms |
+| Insecure Coding Practices | Poor input validation |
 
 ---
 
-# ⚖️ SAST vs DAST vs SCA
-
-| Feature | SAST | DAST | SCA |
-|----------|------|------|------|
-| Analyzes | Source Code | Running Application | Third-Party Dependencies |
-| Application Running | ❌ No | ✅ Yes | ❌ No |
-| Finds | Coding Issues | Runtime Issues | Vulnerable Libraries |
-| SDLC Stage | Development | Testing | Build |
-
----
-
-# 🔍 Common Vulnerabilities Detected
-
-SAST tools commonly detect:
-
-- SQL Injection
-- Cross-Site Scripting (XSS)
-- Command Injection
-- Hardcoded Credentials
-- Weak Cryptography
-- Buffer Overflows
-- Path Traversal
-- Insecure Deserialization
-- Improper Error Handling
-- Insecure Random Number Generation
-
----
-
-# 🛠 Popular SAST Tools
+# 🛠 Common SAST Tools
 
 | Tool | Description |
 |------|-------------|
-| Semgrep | Fast open-source static analysis tool |
-| CodeQL | GitHub's semantic code analysis engine |
 | SonarQube | Code quality and security analysis |
+| Semgrep | Fast rule-based code scanning |
+| CodeQL | Semantic code analysis by GitHub |
 | Checkmarx | Enterprise SAST platform |
-| Fortify SCA | Enterprise static analysis |
+| Fortify SCA | Static code security analysis |
 | Veracode | Cloud-based application security testing |
 
 ---
 
-# 💻 Hands-on Lab (Semgrep)
+# 💻 Practical Example
 
-## Objective
-
-Scan a vulnerable application using Semgrep.
-
----
-
-## Step 1 — Install Semgrep
-
-```bash
-python3 -m pip install semgrep
-```
-
-Verify the installation:
-
-```bash
-semgrep --version
-```
-
----
-
-## Step 2 — Create a Sample Python File
-
-Create a file named `app.py`:
+A developer writes the following code:
 
 ```python
-import os
-
-user_input = input("Enter filename: ")
-os.system("cat " + user_input)
+query = "SELECT * FROM users WHERE id = " + user_input
 ```
 
-This example is intentionally vulnerable because it executes user input directly.
+A SAST tool detects this as a potential **SQL Injection** vulnerability.
 
----
-
-## Step 3 — Run a Security Scan
-
-```bash
-semgrep scan --config=auto .
-```
-
----
-
-## Expected Output
-
-Semgrep should flag the use of `os.system()` with unsanitized user input as a potential command injection vulnerability.
-
----
-
-## Step 4 — Fix the Code
-
-Replace:
+Recommended fix:
 
 ```python
-os.system("cat " + user_input)
+cursor.execute(
+    "SELECT * FROM users WHERE id = %s",
+    (user_input,)
+)
 ```
 
-With a safer approach using Python's `subprocess` module and proper input validation.
-
-Run the scan again to confirm the issue is resolved.
+Using parameterized queries helps prevent SQL Injection attacks.
 
 ---
 
-# 🚀 GitHub Actions Integration
+# 📊 SAST vs DAST
 
-Example workflow:
-
-```yaml
-name: SAST Scan
-
-on:
-  push:
-  pull_request:
-
-jobs:
-  semgrep:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: returntocorp/semgrep-action@v1
-```
-
-This workflow automatically scans code on every push and pull request.
+| SAST | DAST |
+|------|------|
+| Tests source code | Tests running application |
+| Finds issues early | Finds runtime vulnerabilities |
+| Does not execute the application | Requires a running application |
+| White Box Testing | Black Box Testing |
+| Used during development | Used after deployment or staging |
 
 ---
 
-# 📌 Best Practices
+# ✅ Best Practices
 
 - Scan every Pull Request.
-- Fix High and Critical findings immediately.
-- Keep security rules updated.
+- Integrate SAST into CI/CD pipelines.
+- Fix High and Critical issues first.
+- Review findings regularly.
 - Combine SAST with DAST and SCA.
-- Review false positives carefully.
-- Educate developers on secure coding practices.
+- Keep SAST rules updated.
 
 ---
 
-# ❌ Common Mistakes
+# ⚠️ Common Mistakes
 
-- Ignoring scan results.
-- Treating SAST as the only security solution.
-- Running scans only before production.
-- Using outdated rule sets.
-- Not integrating SAST into CI/CD.
+- Running SAST only before release.
+- Ignoring reported vulnerabilities.
+- Treating all findings as critical.
+- Not reviewing false positives.
+- Depending only on SAST for application security.
 
 ---
 
-# 💡 Key Takeaways
+# 📝 Quick Revision
 
-- SAST analyzes source code without running the application.
-- It supports the Shift Left Security approach.
-- It detects coding vulnerabilities early.
-- It integrates seamlessly into CI/CD pipelines.
-- SAST should be combined with DAST, SCA, and runtime security for comprehensive protection.
+- SAST scans source code without executing it.
+- SAST is a White Box Testing technique.
+- Finds vulnerabilities early in development.
+- Common tools include SonarQube, Semgrep, and CodeQL.
+- SAST works best when integrated into CI/CD.
 
 ---
 
 # 🎤 Interview Questions
 
-1. What is Static Application Security Testing (SAST)?
-2. How does SAST differ from DAST?
-3. Why is SAST considered a Shift Left practice?
-4. Name three popular SAST tools.
-5. What types of vulnerabilities can SAST detect?
-6. Can SAST detect runtime vulnerabilities? Why or why not?
-7. How would you integrate SAST into a GitHub Actions pipeline?
+### 1. What is SAST?
+
+**Answer:**
+
+SAST (Static Application Security Testing) analyzes an application's source code without executing it to identify security vulnerabilities early in the SDLC.
 
 ---
 
-# 📚 References
+### 2. Why is SAST important?
 
-- OWASP
-- Semgrep Documentation
-- GitHub CodeQL Documentation
-- SonarQube Documentation
+**Answer:**
 
----
-
-# 📝 Summary
-
-Static Application Security Testing (SAST) is a foundational DevSecOps practice that analyzes source code for security vulnerabilities before an application is executed. By integrating SAST into the development workflow and CI/CD pipelines, teams can identify and remediate issues early, reducing risk and supporting the Shift Left Security approach.
+It helps detect vulnerabilities early, reduces remediation costs, improves code quality, and supports Shift Left Security.
 
 ---
 
-## 📚 Next Chapter
+### 3. What types of vulnerabilities can SAST detect?
 
-➡️ **06-sca.md**
+**Answer:**
 
-Learn how **Software Composition Analysis (SCA)** identifies vulnerable third-party libraries and open-source dependencies before they become security risks.
+SAST can detect:
+
+- SQL Injection
+- Cross-Site Scripting (XSS)
+- Hardcoded secrets
+- Command Injection
+- Weak cryptography
+- Insecure coding practices
+
+---
+
+### 4. What is the difference between SAST and DAST?
+
+**Answer:**
+
+SAST analyzes source code without executing the application, whereas DAST tests a running application from the outside to identify runtime vulnerabilities.
+
+---
+
+### 5. Name some popular SAST tools.
+
+**Answer:**
+
+- SonarQube
+- Semgrep
+- CodeQL
+- Checkmarx
+- Fortify SCA
+- Veracode
+
+---
+
+### 6. Can SAST replace DAST?
+
+**Answer:**
+
+No. SAST and DAST complement each other. SAST identifies coding issues early, while DAST detects vulnerabilities in a running application.
+
+---
+
+# 📌 Key Takeaways
+
+- SAST scans source code without executing the application.
+- It supports Shift Left Security by identifying vulnerabilities early.
+- SAST improves code quality and application security.
+- Integrating SAST into CI/CD enables automated security checks.
+- SAST should be used together with DAST, SCA, and other security testing techniques.
+
+---
+
+## ⏭️ Next
+
+**➡️ 06-sca.md**
