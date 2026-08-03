@@ -1,296 +1,238 @@
 # 📘 Software Composition Analysis (SCA)
 
-<p align="center">
-
 > **"Secure your dependencies before they become your vulnerabilities."**
 
-Analyze Open-Source Libraries • Detect Known Vulnerabilities • Secure the Software Supply Chain
-
-</p>
+Software Composition Analysis (SCA) is the process of identifying and managing security risks in third-party libraries, open-source packages, and project dependencies.
 
 ---
 
 ## 📑 Table of Contents
 
-- [📋 Chapter Information](#-chapter-information)
-- [🎯 Learning Objectives](#-learning-objectives)
-- [📚 Prerequisites](#-prerequisites)
 - [📖 What is SCA?](#-what-is-sca)
-- [🤔 Why SCA Matters](#-why-sca-matters)
-- [⚙️ How SCA Works](#️-how-sca-works)
-- [🔄 SCA Workflow](#-sca-workflow)
-- [⚖️ SAST vs SCA](#️-sast-vs-sca)
-- [🔍 What Can SCA Detect?](#-what-can-sca-detect)
-- [🛠 Popular SCA Tools](#-popular-sca-tools)
-- [💻 Hands-on Example](#-hands-on-example)
-- [🚀 GitHub Actions Integration](#-github-actions-integration)
-- [📌 Best Practices](#-best-practices)
-- [❌ Common Mistakes](#-common-mistakes)
-- [💡 Key Takeaways](#-key-takeaways)
+- [🎯 Why SCA?](#-why-sca)
+- [🔄 How SCA Works](#-how-sca-works)
+- [🔍 What Does SCA Detect?](#-what-does-sca-detect)
+- [🛠 Common SCA Tools](#-common-sca-tools)
+- [💻 Practical Example](#-practical-example)
+- [📊 SAST vs SCA](#-sast-vs-sca)
+- [✅ Best Practices](#-best-practices)
+- [⚠️ Common Mistakes](#️-common-mistakes)
+- [📝 Quick Revision](#-quick-revision)
 - [🎤 Interview Questions](#-interview-questions)
-- [📚 References](#-references)
-- [📝 Summary](#-summary)
 
 ---
 
-## 📋 Chapter Information
+# 📖 What is SCA?
 
-| Category | Details |
-|-----------|----------|
-| Difficulty | 🟢 Beginner |
-| Reading Time | 15–20 Minutes |
-| Hands-on | ✅ Yes |
-| Interview Focus | ⭐⭐⭐⭐⭐ |
+Software Composition Analysis (SCA) scans an application's third-party libraries, frameworks, and open-source dependencies to identify known security vulnerabilities.
 
----
+Instead of analyzing your source code, SCA analyzes the external packages your application depends on.
 
-## 🎯 Learning Objectives
-
-After completing this chapter, you will be able to:
-
-- Explain Software Composition Analysis (SCA).
-- Understand dependency vulnerabilities.
-- Identify risks in open-source libraries.
-- Use SCA tools to scan dependencies.
-- Integrate SCA into CI/CD pipelines.
+> [!NOTE]
+> Modern applications often contain more third-party code than custom code, making dependency security critical.
 
 ---
 
-## 📚 Prerequisites
+# 🎯 Why SCA?
 
-Before reading this chapter, you should understand:
+Using outdated or vulnerable dependencies can expose applications to serious security risks.
 
-- DevSecOps Basics
-- Shift Left Security
-- SAST
-- Git & GitHub
+SCA helps organizations:
 
----
-
-## 📖 What is SCA?
-
-**Software Composition Analysis (SCA)** is a security testing practice that analyzes an application's third-party libraries and open-source dependencies for known security vulnerabilities.
-
-Modern applications rely heavily on external packages from ecosystems such as:
-
-- npm
-- pip
-- Maven
-- Gradle
-- NuGet
-- Go Modules
-
-If one of these dependencies contains a known vulnerability, your application may also become vulnerable.
+- Detect vulnerable dependencies.
+- Identify outdated packages.
+- Ensure license compliance.
+- Reduce supply chain risks.
+- Improve overall application security.
 
 ---
 
-## 🤔 Why SCA Matters
-
-Developers rarely write every line of code themselves.
-
-Instead, applications often include hundreds or even thousands of open-source packages.
-
-Example:
+# 🔄 How SCA Works
 
 ```text
-Application
-│
-├── Flask
-├── Requests
-├── NumPy
-├── Jinja2
-└── urllib3
+Developer Adds Dependency
+          │
+          ▼
+ Git Push / Pull Request
+          │
+          ▼
+      SCA Scanner
+          │
+          ▼
+Analyzes Dependencies
+          │
+          ▼
+Checks Vulnerability Database
+          │
+          ▼
+Security Report
+          │
+          ▼
+Update or Replace Dependency
 ```
 
-If one package has a published CVE, attackers may exploit it unless it is updated or replaced.
+SCA compares project dependencies against known vulnerability databases such as the **National Vulnerability Database (NVD)**.
 
 ---
 
-## ⚙️ How SCA Works
+# 🔍 What Does SCA Detect?
 
-```text
-Application
-      │
-      ▼
-Dependency Manifest
-(requirements.txt / package.json / pom.xml)
-      │
-      ▼
-SCA Scanner
-      │
-      ├── Identify Packages
-      ├── Check CVE Database
-      ├── Report Vulnerabilities
-      └── Recommend Updates
-```
+| Detects | Example |
+|----------|---------|
+| Vulnerable Dependencies | Old Log4j version |
+| Outdated Packages | Unsupported library versions |
+| Known CVEs | Publicly disclosed vulnerabilities |
+| License Issues | GPL, MIT, Apache licenses |
+| Transitive Dependencies | Vulnerabilities in nested packages |
 
 ---
 
-## 🔄 SCA Workflow
-
-```text
-Developer
-     │
-     ▼
-Install Dependencies
-     │
-     ▼
-Run SCA Scan
-     │
-     ▼
-Identify Vulnerabilities
-     │
-     ▼
-Upgrade Packages
-     │
-     ▼
-Re-scan
-     │
-     ▼
-Deploy
-```
-
----
-
-## ⚖️ SAST vs SCA
-
-| SAST | SCA |
-|------|-----|
-| Scans your source code | Scans third-party libraries |
-| Finds coding vulnerabilities | Finds vulnerable dependencies |
-| No application execution required | No application execution required |
-| Focuses on developer-written code | Focuses on external packages |
-
----
-
-## 🔍 What Can SCA Detect?
-
-SCA tools can identify:
-
-- Known CVEs
-- Outdated packages
-- Vulnerable dependencies
-- Transitive dependencies
-- License issues
-- End-of-life libraries
-
----
-
-## 🛠 Popular SCA Tools
+# 🛠 Common SCA Tools
 
 | Tool | Description |
 |------|-------------|
+| Dependabot | GitHub dependency updates |
+| Snyk | Dependency vulnerability scanning |
 | OWASP Dependency-Check | Open-source dependency scanner |
-| Snyk | Cloud-native dependency security |
-| GitHub Dependabot | Automated dependency updates |
-| Trivy | Dependency and container scanning |
-| Mend (WhiteSource) | Enterprise SCA platform |
+| Mend (WhiteSource) | Open-source security management |
+| GitLab Dependency Scanning | Built-in GitLab security scanner |
 
 ---
 
-## 💻 Hands-on Example
+# 💻 Practical Example
 
-Suppose a Python project contains:
+A project uses the following dependency:
 
 ```text
-requirements.txt
-
-Flask==2.0.0
-requests==2.25.0
+log4j-core:2.14.1
 ```
 
-Run a dependency scan using your preferred SCA tool.
+The SCA tool detects that this version contains **Log4Shell (CVE-2021-44228)**.
 
-The scanner compares package versions against known vulnerability databases and reports any issues.
+Security Report:
 
-Update affected packages and run the scan again to verify that the vulnerabilities have been resolved.
+```text
+Dependency: log4j-core
+Version: 2.14.1
+Severity: Critical
+Recommendation:
+Upgrade to the latest secure version.
+```
+
+The developer updates the dependency, eliminating the known vulnerability.
 
 ---
 
-## 🚀 GitHub Actions Integration
+# 📊 SAST vs SCA
 
-```yaml
-name: Dependency Scan
-
-on:
-  push:
-  pull_request:
-
-jobs:
-  dependency-scan:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Run Dependency Check
-        run: echo "Run your preferred SCA tool here"
-```
-
-Replace the placeholder command with the SCA tool used in your environment.
+| SAST | SCA |
+|------|-----|
+| Scans source code | Scans third-party dependencies |
+| Detects coding vulnerabilities | Detects dependency vulnerabilities |
+| Focuses on custom code | Focuses on open-source libraries |
+| Example: SQL Injection | Example: Vulnerable Log4j version |
 
 ---
 
-## 📌 Best Practices
+# ✅ Best Practices
 
 - Scan dependencies regularly.
-- Keep packages updated.
-- Remove unused libraries.
-- Enable Dependabot or similar tools.
-- Review transitive dependencies.
+- Keep libraries updated.
+- Remove unused dependencies.
 - Automate dependency scanning in CI/CD.
+- Review license compliance.
+- Monitor newly published CVEs.
 
 ---
 
-## ❌ Common Mistakes
+# ⚠️ Common Mistakes
 
 - Ignoring dependency updates.
 - Using unsupported libraries.
 - Installing unnecessary packages.
-- Running SCA only before production.
-- Ignoring vulnerability reports.
+- Ignoring transitive dependencies.
+- Running SCA only before release.
 
 ---
 
-## 💡 Key Takeaways
+# 📝 Quick Revision
 
-- SCA secures third-party dependencies.
-- It detects known vulnerabilities before deployment.
-- It supports Shift Left Security.
-- It complements SAST rather than replacing it.
-- Automated dependency scanning should be part of every CI/CD pipeline.
-
----
-
-## 🎤 Interview Questions
-
-1. What is Software Composition Analysis (SCA)?
-2. Why is SCA important?
-3. What is a dependency vulnerability?
-4. How does SCA differ from SAST?
-5. Name some popular SCA tools.
-6. What are transitive dependencies?
-7. How can SCA be integrated into GitHub Actions?
+- SCA scans third-party dependencies.
+- Detects known vulnerabilities and CVEs.
+- Supports software supply chain security.
+- Works best when automated in CI/CD.
+- Dependabot and Snyk are popular SCA tools.
 
 ---
 
-## 📚 References
+# 🎤 Interview Questions
 
-- OWASP Dependency-Check Documentation
-- GitHub Dependabot Documentation
-- Snyk Documentation
-- Trivy Documentation
+### 1. What is Software Composition Analysis (SCA)?
 
----
+**Answer:**
 
-## 📝 Summary
-
-Software Composition Analysis (SCA) helps organizations identify and manage security risks introduced by third-party libraries and open-source dependencies. By continuously scanning dependencies, updating vulnerable packages, and integrating SCA into CI/CD pipelines, teams can reduce the risk of known vulnerabilities reaching production.
+Software Composition Analysis (SCA) identifies vulnerabilities, outdated versions, and license issues in third-party libraries and open-source dependencies.
 
 ---
 
-## 📚 Next Chapter
+### 2. Why is SCA important?
 
-➡️ **07-secrets-management.md**
+**Answer:**
 
-Learn how to protect API keys, passwords, tokens, and other sensitive information using secure secrets management practices.
+Modern applications rely heavily on open-source software. SCA helps detect vulnerable dependencies before they reach production.
+
+---
+
+### 3. What types of issues can SCA detect?
+
+**Answer:**
+
+- Vulnerable dependencies
+- Known CVEs
+- Outdated libraries
+- License compliance issues
+- Transitive dependency vulnerabilities
+
+---
+
+### 4. What is the difference between SAST and SCA?
+
+**Answer:**
+
+SAST scans your application's source code for coding vulnerabilities, while SCA scans third-party dependencies for known security vulnerabilities.
+
+---
+
+### 5. Name some popular SCA tools.
+
+**Answer:**
+
+- Dependabot
+- Snyk
+- OWASP Dependency-Check
+- Mend (WhiteSource)
+- GitLab Dependency Scanning
+
+---
+
+### 6. What is a CVE?
+
+**Answer:**
+
+A **Common Vulnerabilities and Exposures (CVE)** is a publicly disclosed security vulnerability with a unique identifier, making it easier to track and remediate known security issues.
+
+---
+
+# 📌 Key Takeaways
+
+- SCA focuses on securing third-party libraries and dependencies.
+- It identifies known vulnerabilities, outdated packages, and license issues.
+- SCA is essential for software supply chain security.
+- Integrating SCA into CI/CD enables continuous dependency monitoring.
+- Keeping dependencies updated reduces security risks.
+
+---
+
+## ⏭️ Next
+
+**➡️ 07-secrets-management.md**
