@@ -1,281 +1,240 @@
 # 📘 Threat Modeling
 
-<p align="center">
+> **"Think like an attacker before an attacker thinks like you."**
 
-> **"Secure your design before you write your code."**
-
-Identify Threats • Analyze Risks • Build Secure Systems
-
-</p>
+Threat Modeling is the process of identifying potential security threats, vulnerabilities, and attack paths during the design phase of an application so they can be mitigated before development begins.
 
 ---
 
-# 📑 Table of Contents
+## 📑 Table of Contents
 
-- [🎯 Learning Objectives](#-learning-objectives)
 - [📖 What is Threat Modeling?](#-what-is-threat-modeling)
-- [🤔 Why Threat Modeling Matters](#-why-threat-modeling-matters)
-- [🏗 Where Threat Modeling Fits](#-where-threat-modeling-fits)
+- [🎯 Why Threat Modeling?](#-why-threat-modeling)
 - [🔄 Threat Modeling Process](#-threat-modeling-process)
 - [🛡 STRIDE Threat Model](#-stride-threat-model)
-- [📊 Example Architecture](#-example-architecture)
+- [🛠 Common Tools](#-common-tools)
 - [💻 Practical Example](#-practical-example)
-- [🛠 Popular Threat Modeling Tools](#-popular-threat-modeling-tools)
-- [🚀 Best Practices](#-best-practices)
-- [❌ Common Mistakes](#-common-mistakes)
+- [✅ Best Practices](#-best-practices)
+- [⚠️ Common Mistakes](#️-common-mistakes)
+- [📝 Quick Revision](#-quick-revision)
 - [🎤 Interview Questions](#-interview-questions)
-- [📝 Summary](#-summary)
-
----
-
-# 🎯 Learning Objectives
-
-After completing this chapter, you will be able to:
-
-- Explain Threat Modeling.
-- Understand why it is important.
-- Perform basic threat analysis.
-- Understand the STRIDE framework.
-- Identify common attack vectors.
-- Integrate Threat Modeling into DevSecOps.
 
 ---
 
 # 📖 What is Threat Modeling?
 
-Threat Modeling is a structured process used to identify:
+Threat Modeling is a proactive security practice used to identify potential threats and vulnerabilities before an application is developed or deployed.
 
-- What you are building
-- What can go wrong
-- How attackers may exploit the system
-- How to reduce or eliminate those risks
+It helps development teams understand:
 
-Instead of reacting to security incidents after deployment, Threat Modeling helps teams design secure systems from the beginning.
+- What needs protection?
+- Who could attack it?
+- How could it be attacked?
+- How can those attacks be prevented?
+
+> [!NOTE]
+> Threat Modeling is performed during the **planning and design phase**, making it an important Shift Left Security practice.
 
 ---
 
-# 🤔 Why Threat Modeling Matters
-
-Imagine building an online banking application.
+# 🎯 Why Threat Modeling?
 
 Without Threat Modeling:
 
-- Sensitive data may not be encrypted.
-- APIs may lack authentication.
-- Databases may be publicly accessible.
+- Security risks may be overlooked.
+- Design flaws become expensive to fix later.
+- Applications become easier to attack.
 
-These design flaws are expensive to fix later.
-
-Threat Modeling helps identify these issues before development begins.
-
----
-
-# 🏗 Where Threat Modeling Fits
-
-```text
-Business Requirements
-        │
-        ▼
-Architecture Design
-        │
-        ▼
-Threat Modeling
-        │
-        ▼
-Development
-        │
-        ▼
-Testing
-        │
-        ▼
-Deployment
-```
-
-Threat Modeling happens before coding starts.
+Threat Modeling helps teams design secure applications from the beginning.
 
 ---
 
 # 🔄 Threat Modeling Process
 
 ```text
-Step 1
-Understand the Application
-        │
-Step 2
-Draw the Architecture
-        │
-Step 3
 Identify Assets
-        │
-Step 4
+       │
+       ▼
 Identify Threats
-        │
-Step 5
-Assess Risk
-        │
-Step 6
+       │
+       ▼
+Analyze Risks
+       │
+       ▼
 Plan Mitigations
-        │
-Step 7
-Review Continuously
+       │
+       ▼
+Implement Security Controls
 ```
+
+This process is repeated whenever new features or architecture changes are introduced.
 
 ---
 
 # 🛡 STRIDE Threat Model
 
-Microsoft introduced the STRIDE framework to classify common threats.
+STRIDE is Microsoft's popular Threat Modeling framework.
 
-| Category | Meaning | Example |
-|----------|----------|---------|
-| S | Spoofing | Fake user identity |
-| T | Tampering | Modifying data |
-| R | Repudiation | Denying an action |
-| I | Information Disclosure | Data leak |
-| D | Denial of Service | Service unavailable |
-| E | Elevation of Privilege | Normal user becomes admin |
+| Threat | Description | Example |
+|---------|-------------|---------|
+| **S - Spoofing** | Pretending to be another user | Stolen login credentials |
+| **T - Tampering** | Modifying data | Changing database records |
+| **R - Repudiation** | Denying performed actions | User denies making a transaction |
+| **I - Information Disclosure** | Exposing sensitive data | Leaking passwords or API keys |
+| **D - Denial of Service (DoS)** | Making services unavailable | Flooding a server with requests |
+| **E - Elevation of Privilege** | Gaining higher permissions | Normal user becomes administrator |
 
 ---
 
-# 📊 Example Architecture
+# 🛠 Common Tools
 
-```text
-                User
-                 │
-                 ▼
-          Load Balancer
-                 │
-        ┌────────┴────────┐
-        ▼                 ▼
-   Web Application     API Server
-        │                 │
-        └────────┬────────┘
-                 ▼
-             Database
-```
-
-Possible threats:
-
-- SQL Injection
-- XSS
-- Credential Theft
-- API Abuse
-- DDoS
-- Sensitive Data Exposure
+| Tool | Purpose |
+|------|---------|
+| Microsoft Threat Modeling Tool | Create threat models |
+| OWASP Threat Dragon | Open-source threat modeling |
+| Draw.io | Architecture diagrams |
+| Lucidchart | System diagrams |
+| Miro | Collaborative design sessions |
 
 ---
 
 # 💻 Practical Example
 
-Suppose an e-commerce application allows users to log in.
+Suppose you're designing an Online Banking Application.
 
-Possible threats include:
+```text
+User
+ │
+ ▼
+Login Page
+ │
+ ▼
+Application Server
+ │
+ ▼
+Database
+```
 
-### Spoofing
+Possible threats:
 
-Attacker steals user credentials.
+- Stolen user credentials (Spoofing)
+- SQL Injection (Tampering)
+- Data leakage (Information Disclosure)
+- DDoS attack (Denial of Service)
 
-Mitigation:
+Possible mitigations:
 
 - Multi-Factor Authentication (MFA)
-
----
-
-### Tampering
-
-Attacker changes product prices.
-
-Mitigation:
-
-- Server-side validation
 - Input validation
-
----
-
-### Information Disclosure
-
-Database backup becomes public.
-
-Mitigation:
-
 - Encryption
-- IAM policies
-- Private storage
-
----
-
-### Denial of Service
-
-Thousands of fake requests overload the server.
-
-Mitigation:
-
 - Rate limiting
 - Web Application Firewall (WAF)
-- Auto Scaling
 
 ---
 
-# 🛠 Popular Threat Modeling Tools
+# ✅ Best Practices
 
-| Tool | Purpose |
-|--------|----------|
-| Microsoft Threat Modeling Tool | Desktop threat modeling |
-| OWASP Threat Dragon | Open-source threat modeling |
-| draw.io | Architecture diagrams |
-| Lucidchart | System design |
-| Microsoft Visio | Enterprise architecture |
-
----
-
-# 🚀 Best Practices
-
-- Perform Threat Modeling before development.
-- Review architecture regularly.
-- Update threat models after major changes.
+- Perform Threat Modeling during application design.
 - Include developers, security, and operations teams.
-- Document assumptions and mitigations.
+- Update threat models whenever the architecture changes.
+- Prioritize high-risk threats.
+- Document mitigation strategies.
+- Review threat models regularly.
 
 ---
 
-# ❌ Common Mistakes
+# ⚠️ Common Mistakes
 
-- Treating Threat Modeling as a one-time task.
-- Ignoring internal threats.
-- Focusing only on external attackers.
-- Forgetting APIs.
-- Skipping authentication and authorization analysis.
+- Skipping Threat Modeling.
+- Considering only external attackers.
+- Ignoring insider threats.
+- Not updating threat models.
+- Focusing only on technical risks.
+- Failing to document identified threats.
+
+---
+
+# 📝 Quick Revision
+
+- Threat Modeling identifies security risks before development.
+- It is a Shift Left Security practice.
+- STRIDE is the most commonly used Threat Modeling framework.
+- The goal is to identify threats and define mitigations early.
+- Threat Modeling reduces security risks and development costs.
 
 ---
 
 # 🎤 Interview Questions
 
-1. What is Threat Modeling?
+### 1. What is Threat Modeling?
 
-2. Why is Threat Modeling important?
+**Answer:**
 
-3. Explain the STRIDE framework.
-
-4. When should Threat Modeling be performed?
-
-5. Name some Threat Modeling tools.
-
-6. What is Information Disclosure?
-
-7. What is Elevation of Privilege?
+Threat Modeling is the process of identifying potential threats, vulnerabilities, and attack paths during the design phase of an application so they can be mitigated before development begins.
 
 ---
 
-# 📝 Summary
+### 2. Why is Threat Modeling important?
 
-Threat Modeling is a proactive security practice that helps teams identify risks before software is built. By analyzing system architecture, identifying valuable assets, and evaluating potential threats, organizations can design secure applications from the beginning.
+**Answer:**
 
-Threat Modeling supports the DevSecOps principle of **building security into the design phase**, reducing vulnerabilities and improving overall software security.
+It helps identify security risks early, reduces remediation costs, improves application design, and supports secure software development.
 
 ---
 
-## 📚 Next Chapter
+### 3. When should Threat Modeling be performed?
 
-➡️ **05-sast.md**
+**Answer:**
 
-Learn how Static Application Security Testing (SAST) helps identify security vulnerabilities directly in your source code before the application is built or deployed.
+Threat Modeling should be performed during the planning and design phase and updated whenever the application's architecture changes.
+
+---
+
+### 4. What is STRIDE?
+
+**Answer:**
+
+STRIDE is a Threat Modeling framework developed by Microsoft that categorizes threats into:
+
+- Spoofing
+- Tampering
+- Repudiation
+- Information Disclosure
+- Denial of Service
+- Elevation of Privilege
+
+---
+
+### 5. Name some Threat Modeling tools.
+
+**Answer:**
+
+- Microsoft Threat Modeling Tool
+- OWASP Threat Dragon
+- Draw.io
+- Lucidchart
+- Miro
+
+---
+
+### 6. Is Threat Modeling a one-time activity?
+
+**Answer:**
+
+No. Threat Modeling is an ongoing process and should be updated whenever new features, services, or architecture changes are introduced.
+
+---
+
+# 📌 Key Takeaways
+
+- Threat Modeling is a proactive security practice.
+- It identifies threats before development begins.
+- STRIDE is one of the most widely used Threat Modeling frameworks.
+- Early threat identification reduces security risks and remediation costs.
+- Threat Modeling is a key component of Shift Left Security and DevSecOps.
+
+---
+
+## ⏭️ Next
+
+**➡️ 05-sast.md**
