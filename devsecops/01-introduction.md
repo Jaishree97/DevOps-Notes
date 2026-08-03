@@ -221,14 +221,76 @@ The pipeline detects the exposed secret before deployment, preventing a security
 
 # 🎤 Interview Questions
 
-1. What is DevSecOps?
-2. Why is DevSecOps important?
-3. Explain Shift Left Security.
-4. What is the difference between DevOps and DevSecOps?
-5. What is Security as Code?
-6. Name some popular DevSecOps tools.
-7. Why is automation important in DevSecOps?
-8. How does CI/CD support DevSecOps?
+### 1. What is DevSecOps?
+
+**Answer:**
+
+DevSecOps is the practice of integrating security into every stage of the Software Development Lifecycle (SDLC). It combines Development, Security, and Operations to deliver secure software through automation and collaboration.
+
+---
+
+### 2. Why is DevSecOps important?
+
+**Answer:**
+
+DevSecOps helps detect vulnerabilities early, reduces remediation costs, improves software quality, speeds up releases, and strengthens overall application security.
+
+---
+
+### 3. Explain Shift Left Security.
+
+**Answer:**
+
+Shift Left Security means performing security testing earlier in the development lifecycle instead of waiting until deployment. Finding issues early makes them easier and less expensive to fix.
+
+---
+
+### 4. What is the difference between DevOps and DevSecOps?
+
+**Answer:**
+
+DevOps focuses on automation and faster software delivery, while DevSecOps extends DevOps by integrating security into every stage of the SDLC.
+
+---
+
+### 5. What is Security as Code?
+
+**Answer:**
+
+Security as Code is the practice of defining security policies, configurations, and compliance rules in code so they can be automated, version-controlled, and consistently enforced.
+
+---
+
+### 6. Name some popular DevSecOps tools.
+
+**Answer:**
+
+- Git & GitHub
+- GitHub Actions
+- SonarQube
+- Semgrep
+- CodeQL
+- Snyk
+- Dependabot
+- Gitleaks
+- Trivy
+- Checkov
+
+---
+
+### 7. Why is automation important in DevSecOps?
+
+**Answer:**
+
+Automation enables continuous security testing, reduces manual effort, improves consistency, and ensures vulnerabilities are detected before deployment.
+
+---
+
+### 8. How does CI/CD support DevSecOps?
+
+**Answer:**
+
+CI/CD pipelines automatically perform code analysis, dependency scanning, secret detection, container scanning, and infrastructure security checks before deploying applications.
 
 ---
 
