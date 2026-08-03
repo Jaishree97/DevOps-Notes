@@ -1,186 +1,84 @@
 # 📘 Introduction to DevSecOps
 
-<p align="center">
+> **"Build Faster • Secure Earlier • Deploy with Confidence."**
 
-> **"Build Fast. Stay Secure. Deliver with Confidence."**
-
-Integrating security into every stage of the Software Development Lifecycle (SDLC).
-
-</p>
+DevSecOps integrates **Security** into every stage of the **Software Development Lifecycle (SDLC)**, making it a shared responsibility for Development, Security, and Operations teams.
 
 ---
 
 ## 📑 Table of Contents
 
-- [🎯 Learning Objectives](#-learning-objectives)
 - [📖 What is DevSecOps?](#-what-is-devsecops)
-- [🤔 Why DevSecOps?](#-why-devsecops)
-- [📜 Evolution of DevSecOps](#-evolution-of-devsecops)
+- [🚀 Why DevSecOps?](#-why-devsecops)
+- [📈 Evolution of DevSecOps](#-evolution-of-devsecops)
 - [⚖️ DevOps vs DevSecOps](#️-devops-vs-devsecops)
 - [🔑 Core Principles](#-core-principles)
 - [🔄 DevSecOps Lifecycle](#-devsecops-lifecycle)
 - [🛠 Common DevSecOps Tools](#-common-devsecops-tools)
-- [💻 Mini Hands-on Activity](#-mini-hands-on-activity)
-- [🌍 Real-World Example](#-real-world-example)
-- [🚀 Best Practices](#-best-practices)
+- [💻 Practical Example](#-practical-example)
+- [✅ Best Practices](#-best-practices)
 - [⚠️ Common Mistakes](#️-common-mistakes)
-- [💡 Key Terms](#-key-terms)
+- [📝 Quick Revision](#-quick-revision)
 - [🎤 Interview Questions](#-interview-questions)
-- [📝 Summary](#-summary)
-
----
-
-# 🎯 Learning Objectives
-
-After completing this chapter, you will be able to:
-
-- Understand what DevSecOps is.
-- Explain why DevSecOps evolved from DevOps.
-- Describe the role of security in modern software delivery.
-- Understand the DevSecOps lifecycle.
-- Identify common DevSecOps tools.
-- Explain Shift Left Security at a high level.
 
 ---
 
 # 📖 What is DevSecOps?
 
-**DevSecOps** is a software development approach that integrates **security into every phase of the Software Development Lifecycle (SDLC)**.
+**DevSecOps (Development + Security + Operations)** is the practice of integrating security into every phase of the Software Development Lifecycle (SDLC).
 
-Instead of treating security as the final step before deployment, DevSecOps makes security a continuous process throughout development, testing, deployment, and operations.
+Instead of performing security checks only before deployment, DevSecOps makes security **continuous, automated, and collaborative** throughout the software delivery process.
 
-**DevSecOps = Development + Security + Operations**
-
-The primary goal is to deliver software that is:
-
-- Secure
-- Reliable
-- Automated
-- Fast
-- Continuously monitored
+> [!NOTE]
+> **Security is everyone's responsibility—not just the security team's.**
 
 ---
 
-## Traditional Approach
+# 🚀 Why DevSecOps?
+
+In traditional software development, security was often performed at the end of the project.
+
+This resulted in:
+
+- Late vulnerability detection
+- Higher fixing costs
+- Slower releases
+- Compliance issues
+- Increased security risks
+
+DevSecOps solves these problems by integrating security early into development.
+
+---
+
+## Traditional SDLC
 
 ```text
-Develop
-   │
-   ▼
-Test
-   │
-   ▼
-Deploy
-   │
-   ▼
-Security Review ❌
+Plan → Code → Build → Test → Deploy → Security ❌
 ```
 
-Security happens at the end, making fixes expensive and delaying releases.
+Security is performed only before release.
 
 ---
 
-## DevSecOps Approach
+## DevSecOps SDLC
 
 ```text
-Security
-    ▲
-    │
+              Security
+                  ▲
 Plan → Code → Build → Test → Release → Deploy → Monitor
 ```
 
-Security is integrated throughout the entire software lifecycle.
+Security is integrated into every stage.
 
 ---
 
-# 🤔 Why DevSecOps?
+# 📈 Evolution of DevSecOps
 
-Modern software is released rapidly using CI/CD pipelines.
-
-If security is only performed before deployment:
-
-- Vulnerabilities remain hidden longer.
-- Fixing issues becomes more expensive.
-- Releases are delayed.
-- Business risk increases.
-- Customer trust may be affected.
-
-DevSecOps addresses these challenges by embedding security into everyday development workflows.
-
----
-
-# 📜 Evolution of DevSecOps
-
-## Traditional Development
-
-```text
-Development
-      │
-      ▼
-Testing
-      │
-      ▼
-Deployment
-      │
-      ▼
-Security Team
-```
-
-Security was isolated and introduced late.
-
----
-
-## DevOps
-
-```text
-Plan
- ↓
-Code
- ↓
-Build
- ↓
-Test
- ↓
-Release
- ↓
-Deploy
- ↓
-Operate
- ↓
-Monitor
-```
-
-Focus:
-
-- Collaboration
-- Automation
-- Faster delivery
-
----
-
-## DevSecOps
-
-```text
-           Security
-
-Plan
- ↓
-Code
- ↓
-Build
- ↓
-Test
- ↓
-Release
- ↓
-Deploy
- ↓
-Operate
- ↓
-Monitor
-
-Security integrated everywhere.
-```
+| Traditional Development | DevOps | DevSecOps |
+|-------------------------|---------|-----------|
+| Manual processes | Automation & CI/CD | Automation + Security |
+| Security at the end | Faster delivery | Continuous security |
+| Separate teams | Dev & Ops collaboration | Dev, Sec & Ops collaboration |
 
 ---
 
@@ -188,122 +86,58 @@ Security integrated everywhere.
 
 | DevOps | DevSecOps |
 |---------|-----------|
-| Security is often a separate activity | Security is integrated throughout the SDLC |
-| Focuses on speed and automation | Balances speed with security |
-| Security testing may occur later | Security testing starts early |
-| Developers own code | Developers, Operations, and Security share responsibility |
-| Reactive security | Proactive security |
+| Focus on speed and automation | Focus on speed, automation, and security |
+| Security is often a separate phase | Security is integrated into every phase |
+| Faster deployments | Secure and faster deployments |
+| Dev & Ops collaboration | Dev, Security & Ops collaboration |
 
 ---
 
 # 🔑 Core Principles
 
-## 1️⃣ Shift Left Security
-
-Perform security checks early in development.
-
-Benefits:
-
-- Detect vulnerabilities sooner
-- Lower remediation costs
-- Faster development cycles
-
----
-
-## 2️⃣ Automation
-
-Automate repetitive security tasks such as:
-
-- Static code analysis (SAST)
-- Dependency scanning (SCA)
-- Secret detection
-- Container scanning
-- Infrastructure scanning
-
----
-
-## 3️⃣ Continuous Security
-
-Security is not a one-time activity.
-
-It includes:
-
-- Continuous scanning
-- Continuous monitoring
-- Continuous compliance
-- Continuous vulnerability management
-
----
-
-## 4️⃣ Collaboration
-
-Security becomes everyone's responsibility.
-
-Teams involved:
-
-- Developers
-- Security Engineers
-- DevOps Engineers
-- Cloud Engineers
-- Operations Teams
-
----
-
-## 5️⃣ Security as Code
-
-Security policies are managed like application code.
-
-Examples include:
-
-- IAM policies
-- Terraform policies
-- Kubernetes policies
-- GitHub Actions workflows
+- 🔒 **Shift Left Security** – Detect vulnerabilities early.
+- 🤖 **Automation** – Automate security checks within CI/CD.
+- 🔄 **Continuous Security** – Continuously scan and monitor applications.
+- 🤝 **Shared Responsibility** – Everyone is responsible for security.
+- 📜 **Security as Code** – Define security policies using code.
 
 ---
 
 # 🔄 DevSecOps Lifecycle
 
 ```text
-Requirements
-      │
-      ▼
-Planning
-      │
-      ▼
-Coding
-      │
-      ▼
+Plan
+ │
+Code
+ │
 Build
-      │
-      ▼
-Testing
-      │
-      ▼
-Security Scanning
-      │
-      ▼
-Deployment
-      │
-      ▼
-Monitoring
-      │
-      ▼
-Feedback & Continuous Improvement
+ │
+Test
+ │
+Security Scan
+ │
+Release
+ │
+Deploy
+ │
+Monitor
+ │
+Feedback
 ```
 
-Security activities are integrated into every stage.
+> [!TIP]
+> Security should be integrated throughout the SDLC, not added at the end.
 
 ---
 
 # 🛠 Common DevSecOps Tools
 
 | Category | Popular Tools |
-|------------|------------------------------|
+|-----------|---------------|
 | Version Control | Git, GitHub, GitLab |
 | CI/CD | GitHub Actions, Jenkins, GitLab CI |
 | SAST | SonarQube, Semgrep, CodeQL |
-| Dependency Scanning | Snyk, Dependabot, OWASP Dependency-Check |
+| SCA | Dependabot, Snyk, OWASP Dependency-Check |
 | Secret Scanning | Gitleaks, TruffleHog |
 | Container Security | Trivy, Docker Scout, Grype |
 | IaC Security | Checkov, tfsec, Terrascan |
@@ -312,131 +146,102 @@ Security activities are integrated into every stage.
 
 ---
 
-# 💻 Mini Hands-on Activity
+# 💻 Practical Example
 
-Imagine a developer accidentally commits an AWS Access Key to a Git repository.
+A developer accidentally commits an AWS Access Key to GitHub.
 
-### Without DevSecOps
+Without DevSecOps:
 
 ```text
 Developer
-    │
-    ▼
-GitHub
-    │
-    ▼
-Production
-
-❌ Secret reaches production.
+   │
+Git Push
+   │
+Production ❌
 ```
 
----
-
-### With DevSecOps
+With DevSecOps:
 
 ```text
 Developer
-    │
-    ▼
-GitHub
-    │
-    ▼
+   │
+Git Push
+   │
 GitHub Actions
-
-├── Secret Scan ✅
-├── Dependency Scan ✅
-├── SAST ✅
-
-    │
-    ▼
-
-Deployment
+   │
+├── Code Quality
+├── Unit Tests
+├── SAST
+├── Dependency Scan
+├── Secret Scan
+├── Container Scan
+└── IaC Scan
+   │
+Deploy ✅
 ```
 
-The pipeline detects the exposed secret before deployment and blocks the release.
+The pipeline detects the exposed secret before deployment, preventing a security incident.
 
 ---
 
-# 🌍 Real-World Example
-
-An organization uses GitHub Actions for CI/CD.
-
-Every pull request automatically performs:
-
-- Code quality analysis
-- Secret scanning
-- Dependency scanning
-- Container image scanning
-- Infrastructure as Code scanning
-
-Only builds that pass all security checks are deployed.
-
-This helps reduce vulnerabilities while maintaining fast release cycles.
-
----
-
-# 🚀 Best Practices
+# ✅ Best Practices
 
 - Shift security left.
-- Automate repetitive security tasks.
+- Automate security testing.
+- Scan every Pull Request.
 - Keep dependencies updated.
-- Scan every pull request.
-- Use least-privilege access.
-- Never store secrets in source code.
-- Monitor production continuously.
-- Review vulnerabilities regularly.
+- Never hardcode secrets.
+- Apply the Principle of Least Privilege.
+- Continuously monitor production.
+- Regularly fix reported vulnerabilities.
 
 ---
 
 # ⚠️ Common Mistakes
 
-- Treating security as a separate phase.
+- Treating security as the final step.
+- Hardcoding credentials.
 - Ignoring dependency vulnerabilities.
-- Hardcoding secrets.
-- Skipping security scans to save time.
-- Running outdated container images.
-- Delaying security fixes.
+- Skipping automated security scans.
+- Using outdated container images.
+- Delaying vulnerability fixes.
 
 ---
 
-# 💡 Key Terms
+# 📝 Quick Revision
 
-| Term | Meaning |
-|-------|----------|
-| SDLC | Software Development Life Cycle |
-| DevSecOps | Development + Security + Operations |
-| SAST | Static Application Security Testing |
-| DAST | Dynamic Application Security Testing |
-| SCA | Software Composition Analysis |
-| IaC | Infrastructure as Code |
-| CI/CD | Continuous Integration / Continuous Deployment |
-| Shift Left | Perform security earlier in the SDLC |
+- DevSecOps = Development + Security + Operations.
+- Security is integrated throughout the SDLC.
+- Shift Left = Find issues early.
+- Security should be automated in CI/CD.
+- Everyone shares responsibility for security.
+- Security as Code helps enforce consistent policies.
 
 ---
 
 # 🎤 Interview Questions
 
 1. What is DevSecOps?
-2. Why was DevSecOps introduced?
+2. Why is DevSecOps important?
 3. Explain Shift Left Security.
-4. How is DevSecOps different from DevOps?
+4. What is the difference between DevOps and DevSecOps?
 5. What is Security as Code?
-6. Name some common DevSecOps tools.
+6. Name some popular DevSecOps tools.
 7. Why is automation important in DevSecOps?
-8. What role does CI/CD play in DevSecOps?
+8. How does CI/CD support DevSecOps?
 
 ---
 
-# 📝 Summary
+# 📌 Key Takeaways
 
-DevSecOps extends DevOps by embedding security into every stage of the software development lifecycle. By integrating automated security testing, continuous monitoring, and collaborative practices, teams can deliver software that is both fast and secure.
-
-Rather than treating security as a final checkpoint, DevSecOps makes it a shared responsibility across development, security, and operations teams.
+- DevSecOps extends DevOps by embedding security into every stage of software delivery.
+- Security becomes continuous, automated, and collaborative.
+- Early detection reduces cost, improves quality, and speeds up releases.
+- CI/CD pipelines automate security testing before deployment.
+- DevSecOps helps deliver secure, reliable, and production-ready applications.
 
 ---
 
-## 📚 Next Chapter
+## ⏭️ Next
 
-➡️ **02-devsecops-lifecycle.md**
-
-In the next chapter, we'll explore each stage of the DevSecOps lifecycle and understand how security practices are applied from planning to production.
+**➡️ 02-devsecops-lifecycle.md**
