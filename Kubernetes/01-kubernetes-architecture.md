@@ -4,7 +4,7 @@
 
 ---
 
-# Why Kubernetes Exists
+# 1. Why Kubernetes Exists
 
 Docker allows you to build and run containers, but it focuses on running containers on a **single machine**. As applications grow across multiple servers, managing containers manually becomes difficult.
 
@@ -16,43 +16,45 @@ Kubernetes solves this by automatically:
 - Managing networking and service discovery
 - Maintaining the desired state of applications
 
-> **Docker runs containers. Kubernetes manages containers at scale.**
+> 💡 **Docker runs containers. Kubernetes manages containers at scale.**
 
 ---
 
-# History
+# 2. History
 
-- **Created by:** Google
-- **Open-sourced:** 2014
-- **Maintained by:** CNCF (Cloud Native Computing Foundation)
-- **Inspired by:** Google's Borg system
-- **Abbreviation:** **K8s** (8 letters between K and S)
+| Topic | Details |
+|-------|---------|
+| **Created By** | Google |
+| **Open-Sourced** | 2014 |
+| **Maintained By** | CNCF (Cloud Native Computing Foundation) |
+| **Inspired By** | Google's Borg system |
+| **Abbreviation** | K8s (8 letters between K and S) |
 
 ---
 
-# Kubernetes Architecture
+# 3. Kubernetes Architecture
 
-The Kubernetes cluster consists of two main parts:
+A Kubernetes cluster consists of two major parts:
 
 - **Control Plane** – Makes decisions and manages the cluster.
-- **Worker Nodes** – Run the application workloads (Pods).
+- **Worker Nodes** – Run the application workloads.
 
-![Kubernetes Architecture](images/kubernetes-cluster-architecture.png)
+![Kubernetes Cluster Architecture](images/kubernetes-cluster-architecture.png)
 
 ---
 
-# Control Plane Components
+## 3.1 Control Plane Components
 
 | Component | Responsibility |
 |-----------|----------------|
 | **API Server** | Entry point for all Kubernetes requests |
-| **Scheduler** | Chooses the best Worker Node for a Pod |
-| **Controller Manager** | Maintains the desired state of the cluster |
-| **etcd** | Stores the entire cluster configuration and state |
+| **Scheduler** | Selects the best Worker Node for new Pods |
+| **Controller Manager** | Ensures the desired state matches the actual state |
+| **etcd** | Stores the cluster configuration and state |
 
 ---
 
-# Worker Node Components
+## 3.2 Worker Node Components
 
 | Component | Responsibility |
 |-----------|----------------|
@@ -62,59 +64,66 @@ The Kubernetes cluster consists of two main parts:
 
 ---
 
-# Kubernetes Request Flow
+# 4. Kubernetes Request Flow
 
-Whenever you run:
+Whenever you execute:
 
 ```bash
 kubectl apply -f pod.yaml
 ```
 
-the request follows this path:
+The request flows through the following stages:
 
 ![Kubernetes Request Flow](images/kubernetes-request-flow.png)
 
-| Step | What Happens |
-|------|--------------|
-| 1 | kubectl sends the request to the API Server |
-| 2 | API Server authenticates and authorizes the request |
-| 3 | API Server validates the manifest |
-| 4 | Desired state is stored in etcd |
-| 5 | Controller Manager notices the new Pod |
-| 6 | Scheduler selects the best Worker Node |
-| 7 | API Server updates the Pod assignment |
-| 8 | kubelet receives the instruction |
-| 9 | Container Runtime pulls the image (if required) |
-| 10 | Container starts and the Pod becomes **Running** |
+| Step | Process |
+|------|---------|
+| **1** | `kubectl` sends the request to the API Server |
+| **2** | API Server authenticates and authorizes the request |
+| **3** | API Server validates the manifest |
+| **4** | Desired state is stored in **etcd** |
+| **5** | Controller Manager detects the new Pod |
+| **6** | Scheduler selects the most suitable Worker Node |
+| **7** | API Server updates the Pod assignment |
+| **8** | kubelet receives the instruction |
+| **9** | Container Runtime pulls the image (if required) |
+| **10** | Container starts and the Pod becomes **Running** |
 
-> **Everything in Kubernetes communicates through the API Server.**
+> 💡 **All communication inside Kubernetes goes through the API Server.**
 
 ---
 
-# Failure Recovery
+# 5. Failure Recovery
 
-One of Kubernetes' biggest strengths is **self-healing**.
+Kubernetes is designed with **self-healing** capabilities.
 
 ![Kubernetes Failure Recovery](images/kubernetes-failure-recovery.png)
 
-### If the API Server goes down
+## 5.1 API Server Failure
 
-- New `kubectl` commands fail
-- No new deployments can be created
-- Existing Pods continue running on Worker Nodes
+If the **API Server** becomes unavailable:
 
-### If a Worker Node goes down
-
-- Kubernetes detects the failed node
-- Node becomes **NotReady**
-- Scheduler selects another healthy node
-- Pods are recreated automatically
-
-> Kubernetes continuously works to match the **desired state** with the **actual state**.
+- ❌ `kubectl` commands cannot be executed.
+- ❌ No new deployments can be created.
+- ✅ Existing Pods continue running on Worker Nodes.
 
 ---
 
-# kubeconfig
+## 5.2 Worker Node Failure
+
+If a **Worker Node** fails:
+
+1. Kubernetes detects the failed node.
+2. The node status changes to **NotReady**.
+3. Scheduler selects another healthy node.
+4. Pods are recreated automatically.
+5. Applications continue running with minimal downtime.
+
+> 💡 Kubernetes continuously works to match the **desired state** with the **actual state**.
+
+---
+
+# 6. kubeconfig
 
 `kubeconfig` is the configuration file used by **kubectl** to connect to Kubernetes clusters.
 
@@ -125,13 +134,13 @@ It stores:
 - Contexts
 - Certificates
 
-**Default location**
+**Default Location**
 
 ```bash
 ~/.kube/config
 ```
 
-Useful commands
+Useful commands:
 
 ```bash
 kubectl config current-context
@@ -141,36 +150,36 @@ kubectl config view
 
 ---
 
-# Built-in Namespaces
+# 7. Built-in Namespaces
 
 | Namespace | Purpose |
 |-----------|---------|
 | `default` | Default namespace for user resources |
 | `kube-system` | Kubernetes system components |
-| `kube-public` | Publicly readable resources |
+| `kube-public` | Public resources |
 | `kube-node-lease` | Stores node heartbeat information |
 
 ---
 
-# Common kubectl Commands
+# 8. Common kubectl Commands
 
 ```bash
-# Cluster Information
+# Display cluster information
 kubectl cluster-info
 
 # List Worker Nodes
 kubectl get nodes
 
-# View all Pods
+# List all Pods
 kubectl get pods -A
 
-# View Pods in kube-system
+# List Pods in kube-system
 kubectl get pods -n kube-system
 
-# Current Context
+# Show current context
 kubectl config current-context
 
-# All Contexts
+# List available contexts
 kubectl config get-contexts
 
 # View kubeconfig
@@ -179,12 +188,12 @@ kubectl config view
 
 ---
 
-# Key Takeaways
+# 9. Key Takeaways
 
-- Kubernetes follows a **Control Plane + Worker Node** architecture.
-- The **API Server** is the central communication hub.
-- **etcd** stores the cluster's desired state.
-- The **Scheduler** decides where Pods run.
-- **kubelet** ensures containers stay healthy.
-- Kubernetes automatically detects failures and recreates Pods when needed.
-- The goal of Kubernetes is to continuously maintain the **desired state** of the cluster.
+- ✅ Kubernetes follows a **Control Plane + Worker Node** architecture.
+- ✅ The **API Server** is the central communication hub.
+- ✅ **etcd** stores the cluster's desired state.
+- ✅ The **Scheduler** decides where Pods run.
+- ✅ **kubelet** ensures containers stay healthy.
+- ✅ Kubernetes automatically detects failures and recreates Pods when required.
+- ✅ Kubernetes continuously maintains the **desired state** of the cluster.
