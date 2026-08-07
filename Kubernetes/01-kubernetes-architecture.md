@@ -45,22 +45,26 @@ A Kubernetes cluster consists of two major parts:
 
 ## 3.1 Control Plane Components
 
-| Component | Responsibility |
-|-----------|----------------|
-| **API Server** | Entry point for all Kubernetes requests |
-| **Scheduler** | Selects the best Worker Node for new Pods |
-| **Controller Manager** | Ensures the desired state matches the actual state |
-| **etcd** | Stores the cluster configuration and state |
+The **Control Plane** manages the entire Kubernetes cluster. It makes scheduling decisions, maintains the desired state, and coordinates all cluster operations.
+
+| **Component** | **Responsibility** |
+|--------------|--------------------|
+| **API Server** | Acts as the central entry point for all Kubernetes API requests and communication between cluster components. |
+| **Scheduler** | Selects the most suitable Worker Node for newly created Pods based on available resources and scheduling policies. |
+| **Controller Manager** | Continuously monitors the cluster and ensures the actual state matches the desired state. |
+| **etcd** | A distributed key-value database that stores the cluster's configuration, metadata, and current state. |
 
 ---
 
 ## 3.2 Worker Node Components
 
-| Component | Responsibility |
-|-----------|----------------|
-| **kubelet** | Ensures Pods are running on the node |
-| **kube-proxy** | Handles networking and Service rules |
-| **Container Runtime** | Runs containers (containerd, CRI-O, etc.) |
+A **Worker Node** is responsible for running application workloads. It hosts Pods and contains the components required to execute and manage containers.
+
+| **Component** | **Responsibility** |
+|--------------|--------------------|
+| **kubelet** | A node agent that communicates with the API Server and ensures Pods are running as expected. |
+| **kube-proxy** | Manages network rules and enables communication between Pods and Services. |
+| **Container Runtime** | Pulls container images and runs containers on the node (e.g., **containerd**, **CRI-O**). |
 
 ---
 
