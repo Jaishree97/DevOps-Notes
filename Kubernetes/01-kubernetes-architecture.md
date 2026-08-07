@@ -45,26 +45,26 @@ A Kubernetes cluster consists of two major parts:
 
 ## 3.1 Control Plane Components
 
-The **Control Plane** manages the entire Kubernetes cluster. It makes scheduling decisions, maintains the desired state, and coordinates all cluster operations.
+The **Control Plane** is the brain of Kubernetes. It manages the cluster, schedules workloads, and ensures the cluster's desired state is maintained.
 
 | **Component** | **Responsibility** |
 |--------------|--------------------|
-| **API Server** | Acts as the central entry point for all Kubernetes API requests and communication between cluster components. |
-| **Scheduler** | Selects the most suitable Worker Node for newly created Pods based on available resources and scheduling policies. |
-| **Controller Manager** | Continuously monitors the cluster and ensures the actual state matches the desired state. |
-| **etcd** | A distributed key-value database that stores the cluster's configuration, metadata, and current state. |
+| **API Server** | Entry point for all Kubernetes API requests and cluster communication. |
+| **Scheduler** | Assigns newly created Pods to the most suitable Worker Node. |
+| **Controller Manager** | Continuously monitors the cluster and maintains the desired state. |
+| **etcd** | Distributed key-value store that holds the cluster's configuration and state. |
 
 ---
 
 ## 3.2 Worker Node Components
 
-A **Worker Node** is responsible for running application workloads. It hosts Pods and contains the components required to execute and manage containers.
+A **Worker Node** runs application workloads. It hosts Pods and contains the components required to execute and manage containers.
 
 | **Component** | **Responsibility** |
 |--------------|--------------------|
-| **kubelet** | A node agent that communicates with the API Server and ensures Pods are running as expected. |
-| **kube-proxy** | Manages network rules and enables communication between Pods and Services. |
-| **Container Runtime** | Pulls container images and runs containers on the node (e.g., **containerd**, **CRI-O**). |
+| **kubelet** | Node agent that manages Pods and communicates with the API Server. |
+| **kube-proxy** | Handles networking and enables communication between Pods and Services. |
+| **Container Runtime** | Pulls container images and runs containers (e.g., **containerd**, **CRI-O**). |
 
 ---
 
