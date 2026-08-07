@@ -32,15 +32,16 @@ Pods provide:
 
 - Shared networking
 - Shared storage
-- Resource management
-- Automatic scheduling
-- Self-healing through higher-level controllers (Deployment, ReplicaSet)
-
+- Consistent deployment and scheduling
+- Simplified resource management
+- Self-healing through higher-level controllers (Deployments and ReplicaSets)
 ---
 
 # 3. Pod Architecture
 
 A Pod consists of one or more containers running together on the same Worker Node.
+
+Most applications run in a **single-container Pod**, while multi-container Pods are typically used for sidecar patterns such as logging or monitoring.
 
 > 📷 **Pod Architecture Diagram**
 
@@ -110,6 +111,8 @@ spec:
 | `metadata` | Stores resource information such as name, labels, and annotations. |
 | `spec` | Defines the desired state of the Pod. |
 | `containers` | Defines the containers that run inside the Pod. |
+
+> 💡 After a resource is created, Kubernetes automatically adds fields such as `uid`, `resourceVersion`, and `creationTimestamp`.
 
 ---
 
@@ -259,6 +262,9 @@ Running
 Validate manifests before creating resources.
 
 ```bash
+# Generate a Pod manifest without creating it
+kubectl run nginx --image=nginx --dry-run=client -o yaml
+
 # Client-side validation
 kubectl apply -f pod.yaml --dry-run=client
 
