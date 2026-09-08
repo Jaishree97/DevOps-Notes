@@ -1,31 +1,27 @@
-# 📚 DevOps Resources
+## 🛠️ DevOps Learning Repositories
 
-A curated collection of useful GitHub repositories, hands-on labs, projects, learning resources, and references for my DevOps journey.
+A curated collection of hands-on DevOps repositories for learning, practicing, and building real-world skills.
 
----
+### ☁️ Terraform
 
-## ☸️ Kubernetes
+- 🔹 [Terraform for DevOps](https://github.com/LondheShubham153/terraform-for-devops)
+  - Terraform fundamentals and AWS infrastructure
+  - EC2, DynamoDB, EKS, modules, and practical examples
 
-### 🔹 Kubestarter
+### ⚙️ Ansible
 
-Practical Kubernetes learning repository with hands-on examples.
+- 🔹 [Ansible In One Shot](https://github.com/TrainWithShubham/ansible-in-one-shot)
+  - Hands-on Ansible learning path
+  - Inventory, variables, templates, loops, roles, Vault, and AWS practice
 
-👉 [Kubestarter](...)
+### 📊 Observability
 
-### 🔹 Kind Cluster
+- 🔹 [Observability for DevOps](https://github.com/Jaishree97/observability-for-devops)
+  - Practical observability stack for DevOps
+  - Prometheus, Grafana, Loki, Promtail, and OpenTelemetry
 
-Kubernetes labs and examples using Kind (Kubernetes in Docker).
+### 🐚 Shell Scripting
 
-👉 [Kubestarter – Kind Cluster](...)
-
----
-
-## 🏗️ Terraform
-
-### 🔹 Terraform for DevOps
-
-Hands-on Terraform repository covering AWS infrastructure, reusable modules, EKS, variables, lifecycle rules, imports, testing, and modern Terraform features.
-
-👉 [Terraform for DevOps](https://github.com/LondheShubham153/terraform-for-devops)
-
----
+- 🔹 [Shell Scripting for DevOps](https://github.com/LondheShubham153/Shell-Scripting-For-DevOps)
+  - Shell scripting practice for DevOps
+  - Bash fundamentals, automation scripts, and hands-on exercises
