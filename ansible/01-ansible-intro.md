@@ -93,9 +93,7 @@ db-server
 
 ## Agentless Architecture
 
-Traditional configuration-management tools may require an agent on every server.
-
-Ansible uses an **agentless approach**:
+Ansible normally connects to Linux/Unix managed nodes using SSH.
 
 ```text
 Control Node
@@ -104,6 +102,8 @@ Control Node
      ▼
 Managed Node
 ```
+No Ansible agent is required on the managed node.
+
 ---
 
 ## How Ansible Works
@@ -170,8 +170,7 @@ nginx already installed
         ↓
      No change
 ```
-
-This is one of Ansible's most important concepts.
+> **Idempotency is one of Ansible's core concepts.**
 
 ---
 
@@ -292,6 +291,18 @@ Inventory
           ▼
     Managed Nodes
 ```
+## Key Terminology
+
+| Term           | Meaning                                |
+| -------------- | -------------------------------------- |
+| **Inventory**  | Defines managed hosts and groups       |
+| **Module**     | Performs a specific operation          |
+| **Task**       | Single unit of work                    |
+| **Play**       | Maps tasks to hosts                    |
+| **Playbook**   | YAML file containing one or more plays |
+| **Role**       | Reusable automation structure          |
+| **Collection** | Package of Ansible content             |
+
 ### Remember
 
 - **Inventory** → Where?
@@ -355,21 +366,6 @@ interpreter_python = auto_silent
 
 > **Ansible = Agentless + YAML + Modules + Inventory + Idempotent Automation**
 
-## Remember the Core Flow
-
-```text
-Control Node
-     ↓
- Inventory
-     ↓
- Playbook
-     ↓
-   Tasks
-     ↓
-  Modules
-     ↓
-Managed Nodes
-```
 ## Interview Essentials
 
 - **Ansible** is primarily **agentless**.
